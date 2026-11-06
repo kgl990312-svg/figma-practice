@@ -1,0 +1,28 @@
+/*
+ * DistrictPage — 화면 2 구 보건소
+ * 모바일 기준 (Figma 360 × 840, 좌우 여백 16px — .container)
+ * 데스크톱 배치는 Figma 링크를 받은 뒤 구현한다.
+ */
+
+/* 네비게이션 ↔ 대제목 8px */
+.district-page__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* 섹션 사이 36px. 아래 36px은 Figma에 없는 여백 — 버튼이 화면 끝에 붙지 않게 */
+.district-page__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+  margin-top: var(--space-section);
+  padding-bottom: var(--space-36);
+}
+
+/* 전화문의 ↔ 위치보기 16px */
+.district-page__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}

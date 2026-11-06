@@ -1,0 +1,24 @@
+/*
+ * NoticeArea — Figma 「공지영역원본」
+ * 너비는 부모(콘텐츠 영역)를 꽉 채운다.
+ */
+.notice-area {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* 지역 필터 버튼 5개 — 화면 폭과 관계없이 항상 한 줄 (사용자 결정)
+ * 5칸을 같은 폭으로 나눈다. 328px에서는 각 59.2px로 Figma와 같다. */
+.notice-area__filters {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+
+/* 공지 목록 3개 */
+.notice-area__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}

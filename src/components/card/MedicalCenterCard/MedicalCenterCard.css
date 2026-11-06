@@ -1,0 +1,72 @@
+/*
+ * MedicalCenterCard — Figma 「의료지원센터」
+ * 너비는 부모(콘텐츠 영역)를 꽉 채운다.
+ */
+
+/* 기본 */
+.medical-center-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  width: 100%;
+  min-height: 3.875rem; /* 62px — Figma 높이. 토큰 없음 */
+  padding: var(--space-16);
+  border: 1px solid var(--color-grey-400); /* 1px 테두리 — 토큰 없음 */
+  border-radius: var(--card-radius-12);
+  background: var(--color-blue-50);
+  color: var(--color-grey-700);
+  text-decoration: none;
+}
+
+/* 센터 이름 — 카드및버튼타이틀 16/26 SemiBold */
+.medical-center-card__name {
+  min-width: 0;
+  font: var(--typo-card-title);
+  word-break: keep-all;
+}
+
+/* 「전화문의」 + 전화 아이콘 — 16/24 Medium (Figma는 Inter, Pretendard GOV로 맞춤) */
+.medical-center-card__call {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--color-grey-400);
+  font-family: var(--font-family);
+  font-size: var(--text-size-16);
+  font-weight: var(--text-weight-500);
+  line-height: var(--text-line-height-24);
+}
+
+.medical-center-card__icon {
+  flex: none;
+}
+
+.medical-center-card__icon--pressed {
+  display: none;
+}
+
+/* 클릭 — 누르는 동안(:active). 테두리 굵기도 바뀌어 색만으로 구분하지 않음
+ * --pressed 클래스는 비교용 미리보기에서 누른 모양을 고정해 보여 줄 때만 쓴다 */
+.medical-center-card:active,
+.medical-center-card--pressed {
+  border: 2px solid var(--color-blue-900); /* 2px 테두리 — 토큰 없음. Figma 그대로 blue/900 (결정 K) */
+  background: var(--color-blue-100);
+  color: var(--color-grey-900);
+}
+
+.medical-center-card:active .medical-center-card__call,
+.medical-center-card--pressed .medical-center-card__call {
+  color: var(--color-blue-700);
+}
+
+.medical-center-card:active .medical-center-card__icon--default,
+.medical-center-card--pressed .medical-center-card__icon--default {
+  display: none;
+}
+
+.medical-center-card:active .medical-center-card__icon--pressed,
+.medical-center-card--pressed .medical-center-card__icon--pressed {
+  display: block;
+}

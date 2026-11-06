@@ -1,0 +1,25 @@
+/*
+ * NoticeTab — Figma 「공지사항타이틀」
+ * 너비는 정하지 않음: 부모 레이아웃(한 줄에 3개)에서 정한다.
+ */
+
+/* 미클릭 (기본) */
+.notice-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--touch-target-min); /* 44px — Figma 높이와 같음 */
+  padding-inline: var(--space-12);
+  border-bottom: 1px solid var(--color-grey-400); /* 1px 선 — 토큰 없음 */
+  color: var(--color-grey-400);
+  font: var(--typo-card-title); /* 카드및버튼타이틀 16/26 SemiBold */
+  text-align: center;
+  word-break: keep-all;
+}
+
+/* 클릭 — 선택된 탭. 색과 함께 아래 선 굵기가 바뀌어 색만으로 구분하지 않음 */
+.notice-tab--selected {
+  border-bottom: 4px solid var(--color-blue-700); /* 4px 선 — 토큰 없음 */
+  color: var(--color-blue-700);
+}

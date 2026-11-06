@@ -1,0 +1,33 @@
+/*
+ * NoticeItem — Figma 「공지텍스트원본」
+ * 너비는 부모(공지 목록)를 꽉 채운다.
+ */
+.notice-item__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  /* 링크일 때 base.css의 '문장 안 링크(밑줄·파란색)' 스타일이 적용되지 않도록 되돌림 */
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 제목 — 한 줄, 넘치면 말줄임. Figma처럼 제목 아래에만 점선 */
+.notice-item__title {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px dashed var(--color-grey-400); /* 1px 점선 — 토큰 없음 */
+  color: var(--color-black-900);
+  font: var(--typo-body); /* 본문 14/24 Regular */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 날짜 — Figma는 93px 고정 칸, 고정 너비 금지 규칙에 따라 글자 길이만큼 차지 */
+.notice-item__date {
+  flex: none;
+  color: var(--color-black-900);
+  font: var(--typo-caption); /* 캡션및보조설명 14/20 Medium */
+  text-align: right;
+}

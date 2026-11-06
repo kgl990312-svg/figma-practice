@@ -1,0 +1,84 @@
+/*
+ * EmergencyBar — Figma 「하단고정긴급」
+ * 화면 맨 아래에 고정, 화면 폭을 꽉 채운다 (Figma 360 × 164).
+ * 이 바가 본문을 가리지 않도록 페이지 쪽에서 아래 여백 164px을 둔다.
+ */
+.emergency-bar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.0625rem; /* 17px — Figma 26px에서 제목 줄이 아래로 넓어진 9px만큼 줄임. 토큰 없음 */
+  padding: var(--space-8);
+  background: var(--color-white-900);
+  box-shadow: var(--shadow-bottom-bar);
+}
+
+/* 펼친 상태에서만 Figma 높이 164px 유지 */
+.emergency-bar:has(.emergency-bar__list:not([hidden])) {
+  min-height: 10.25rem; /* 164px — Figma 높이. 토큰 없음 */
+}
+
+/* 제목 줄 — 줄 전체가 접기/펼치기 버튼 */
+.emergency-bar__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--touch-target-min); /* 44px — Figma 제목 줄은 26px */
+  margin-top: -0.5625rem; /* -9px — 누르는 영역만 위로 넓히고 글자 위치는 Figma와 같게 */
+  padding-inline: var(--space-8);
+  color: var(--color-black-900);
+}
+
+/* 카드및버튼타이틀 16/26 SemiBold */
+.emergency-bar__title {
+  font: var(--typo-card-title);
+}
+
+/* 긴급 버튼 3개 — 같은 폭으로 나눔 */
+.emergency-bar__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+
+.emergency-bar__list[hidden] {
+  display: none;
+}
+
+.emergency-bar__button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: 5.25rem; /* 84px — Figma 높이. 토큰 없음 */
+  height: 100%;
+  padding-block: var(--space-8);
+  border: 2px solid var(--color-red-700); /* 2px 테두리 — 토큰 없음 */
+  border-radius: var(--card-radius-12);
+  background: var(--color-white-900);
+  color: var(--color-red-700);
+  font: var(--typo-button-emergency); /* 긴급 button 14/20 Bold */
+  text-align: center;
+  text-decoration: none;
+}
+
+.emergency-bar__icon--heart {
+  margin-bottom: 0.094rem; /* 1.5px — Figma 그룹 위치 */
+}
+
+.emergency-bar__label {
+  display: flex;
+  flex-direction: column;
+}
+
+.emergency-bar__line {
+  word-break: keep-all;
+}

@@ -1,0 +1,26 @@
+/*
+ * ServicesPage — 화면 3 통합민원
+ * 모바일 기준 (Figma 360 × 840, 좌우 여백 16px — .container)
+ * 데스크톱 배치는 Figma 링크를 받은 뒤 구현한다.
+ */
+
+/* 네비게이션 ↔ 대제목 8px */
+.services-page__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* 대제목 ↔ 섹션타이틀 32px.
+ * 아래 117px은 Figma에 없는 여백 — TOP 버튼(아래 51px + 높이 50px)이 마지막 내용을 가리지 않게 */
+.services-page__content {
+  margin-top: var(--space-32);
+  padding-bottom: 7.3125rem; /* 117px = 51 + 50 + 16. 토큰 없음 */
+}
+
+/* 섹션타이틀 ↔ 아코디언 36px */
+.services-page__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+}

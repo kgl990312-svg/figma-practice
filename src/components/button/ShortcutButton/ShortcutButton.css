@@ -1,0 +1,46 @@
+/*
+ * ShortcutButton — Figma 「하단메인버튼」
+ * 너비는 부모(콘텐츠 영역)를 꽉 채운다. 328 × 88
+ */
+.shortcut-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--space-20);
+  border: 1px solid var(--color-blue-700); /* 1px 테두리 — 토큰 없음 */
+  border-radius: var(--button-radius-8);
+  background: var(--color-white-900);
+  text-decoration: none;
+}
+
+/* 글자 묶음 + 화살표, 간격 8px */
+.shortcut-button__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.shortcut-button__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  word-break: keep-all;
+}
+
+/* 카드및버튼타이틀 16/26 SemiBold */
+.shortcut-button__label {
+  color: var(--color-blue-700);
+  font: var(--typo-card-title);
+}
+
+/* 캡션및보조설명 14/20 Medium */
+.shortcut-button__caption {
+  color: var(--color-grey-400);
+  font: var(--typo-caption);
+}
+
+.shortcut-button__icon {
+  flex: none;
+}

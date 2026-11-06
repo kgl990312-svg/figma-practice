@@ -1,0 +1,4 @@
+/* App 전용 스타일 */
+.app {
+  padding-block: var(--space-section);
+}

@@ -1,0 +1,72 @@
+/*
+ * SubClickButton — Figma 「서브클릭버튼」
+ * 너비는 정하지 않음: 부모 레이아웃(보통 2개 나란히)에서 정한다.
+ */
+.sub-click-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* 보조 문구는 오른쪽 정렬 */
+  gap: var(--space-8);
+  width: 100%;
+}
+
+/* 미클릭버튼 (기본) */
+.sub-click-button__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: 3.125rem; /* 50px — Figma 높이. 토큰 없음 (클릭 52px → 50px로 통일, 결정 B) */
+  padding-inline: var(--space-12);
+  border: 1px solid var(--color-blue-700); /* 1px 테두리 — 토큰 없음 */
+  border-radius: var(--button-radius-8);
+  background: var(--color-white-900);
+  color: var(--color-blue-700);
+  font: var(--typo-card-title); /* 카드및버튼타이틀 16/26 SemiBold */
+  text-decoration: none;
+}
+
+.sub-click-button__label {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.sub-click-button__icon {
+  flex: none;
+}
+
+/* 파일 아이콘 — 20px 칸 안의 Figma 위치 (위 1.34 · 오른쪽 2.63 · 아래 1.35 · 왼쪽 2.56px) */
+.sub-click-button__icon--file {
+  margin: 0.084rem 0.164rem 0.084rem 0.16rem;
+}
+
+.sub-click-button__icon--pressed {
+  display: none;
+}
+
+/* 클릭 — 누르는 동안(:active). 배경이 채워져 색 말고도 모양으로 구분됨
+ * --pressed 클래스는 비교용 미리보기에서 누른 모양을 고정해 보여 줄 때만 쓴다 */
+.sub-click-button__button:active,
+.sub-click-button__button--pressed {
+  background: var(--color-blue-700);
+  color: var(--color-white-900);
+}
+
+.sub-click-button__button:active .sub-click-button__icon--default,
+.sub-click-button__button--pressed .sub-click-button__icon--default {
+  display: none;
+}
+
+.sub-click-button__button:active .sub-click-button__icon--pressed,
+.sub-click-button__button--pressed .sub-click-button__icon--pressed {
+  display: block;
+}
+
+/* 아래 보조 문구 — 캡션및보조설명 14/20 Medium */
+.sub-click-button__caption {
+  color: var(--color-grey-400);
+  font: var(--typo-caption);
+}

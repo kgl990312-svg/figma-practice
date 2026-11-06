@@ -1,0 +1,37 @@
+/*
+ * 레이아웃 — 모바일 우선 (PRD 11. 반응형 처리)
+ *   모바일   360px ~ 840px : 좌우 여백 16px, 섹션 간격 36px   (Figma 360 × 840)
+ *   데스크톱 841px 이상    : 콘텐츠 최대 1200px 가운데 정렬, 섹션 간격 64px (Figma 1440 × 1024)
+ *
+ * 규칙: 너비는 %, rem으로 잡고 고정 px 너비는 쓰지 않는다. 미디어쿼리는 min-width만 쓴다.
+ * 미디어쿼리에는 CSS 변수를 쓸 수 없어 값을 직접 적는다: 52.5625em = 841px
+ * 사이즈별 상세 반응형은 구현 단계에서 전달받는 Figma 링크 기준으로 추가한다.
+ */
+:root {
+  --page-gutter: var(--space-16); /* 16px */
+  --container-max: 75rem; /* 1200px — 콘텐츠 최대 폭 (간격이 아니라 폭이라 토큰 아님) */
+  --space-section: var(--space-36); /* 36px */
+}
+
+@media (min-width: 52.5625em) {
+  :root {
+    --space-section: var(--space-64); /* 64px */
+  }
+}
+
+/* 페이지 콘텐츠 영역
+ * 좌우 여백 16px을 유지하면서 콘텐츠 폭은 최대 1200px.
+ * 1440px 화면에서는 가운데 정렬로 좌우 120px 여백이 생긴다 (Figma와 동일). */
+.container {
+  width: 100%;
+  max-width: calc(var(--container-max) + var(--page-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+/* 세로로 쌓이는 섹션 묶음 */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+}

@@ -1,0 +1,22 @@
+/*
+ * JurisdictionService — Figma 「관할서비스」
+ * 너비는 정하지 않음: 부모(화면 콘텐츠 영역)를 꽉 채운다.
+ * 지원사업 아코디언 모양은 Accordion 컴포넌트에 있다.
+ */
+.jurisdiction-service {
+  display: flex;
+  flex-direction: column;
+  gap: 1.625rem; /* 26px — Figma 메뉴와 아코디언 사이. 토큰 없음 */
+  width: 100%;
+}
+
+/* 메뉴 버튼 11개: 2열, 마지막 하나는 한 줄 전체 */
+.jurisdiction-service__menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+
+.jurisdiction-service__menu > :last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}

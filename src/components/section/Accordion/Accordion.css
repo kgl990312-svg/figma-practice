@@ -1,0 +1,114 @@
+/*
+ * Accordion — Figma 「버튼형아코디언」 · 「아코디언일반」
+ * 너비는 부모(콘텐츠 영역)를 꽉 채운다.
+ */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* 항목 사이 간격 — 화면 2 지원사업 16px, 화면 3 통합민원 26px (Figma) */
+.accordion--normal {
+  gap: var(--space-16);
+}
+
+.accordion--loose {
+  gap: 1.625rem; /* 26px — Figma 통합서비스목록 간격. 토큰 없음 */
+}
+
+.accordion__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24); /* 제목과 펼친 내용 사이 */
+}
+
+.accordion__heading {
+  margin: 0;
+  font: inherit;
+}
+
+/* 제목 줄 전체가 버튼 — 높이 44px로 터치 영역 확보 */
+.accordion__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  width: 100%;
+  min-height: var(--touch-target-min); /* 44px — Figma 아코디언 높이와 같음 */
+  padding-inline: var(--space-12);
+  border: 0;
+  border-bottom: 1px solid var(--color-grey-100); /* 1px 구분선 — 토큰 없음 */
+  background: none;
+  color: var(--color-black-900);
+  font: var(--typo-section-title); /* 섹션타이틀 20/28 SemiBold */
+  text-align: left;
+  cursor: pointer;
+}
+
+.accordion__title {
+  flex: 1 1 0;
+  min-width: 0;
+  word-break: keep-all;
+}
+
+.accordion__chevron {
+  flex: none;
+  margin-inline-end: 0.1875rem; /* 3px — Figma 아이콘 오른쪽 여백. 토큰 없음 */
+}
+
+/* 펼친 내용: 본문 묶음 ↔ 추가 요소(InfoBox) 24px */
+.accordion__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.accordion__panel[hidden] {
+  display: none;
+}
+
+/* 본문 묶음 사이 16px */
+.accordion__sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.accordion__section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-12);
+}
+
+/* 라벨 상자 (자격, 지원내용 등) — Figma 테두리 #777 → 가장 가까운 토큰 grey-400 (사용자 결정) */
+.accordion__label {
+  margin: 0;
+  padding: var(--space-12);
+  border: 1px solid var(--color-grey-400); /* 1px 테두리 — 토큰 없음 */
+  border-radius: var(--card-radius-4);
+  background: var(--color-blue-100);
+  color: var(--color-blue-700);
+  font: var(--typo-card-title); /* 카드및버튼타이틀 16/26 SemiBold */
+}
+
+.accordion__body {
+  margin: 0;
+  color: var(--color-black-900);
+  font: var(--typo-body); /* 본문 14/24 Regular */
+  white-space: pre-wrap; /* 데이터의 \n 줄바꿈과 줄 앞 공백 유지 (Figma 그대로) */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* 아코디언 안 버튼: 1개면 한 줄 전체, 2개면 나란히 */
+.accordion__buttons {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8);
+  align-self: stretch;
+}
+
+.accordion__buttons--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}

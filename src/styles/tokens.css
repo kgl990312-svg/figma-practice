@@ -1,0 +1,117 @@
+/*
+ * 디자인 토큰 — Figma에서 읽은 변수(Variables)와 스타일
+ * 파일: https://www.figma.com/design/ttUW1a9zYIsPGMGH3VCiBz/
+ *
+ * 1. 변수: '개선디자인토큰' 컬렉션 35개 ('원시토큰' 컬렉션은 쓰지 않음)
+ *    이름 규칙: Figma 변수명의 '/'와 공백을 '-'로 바꿈
+ *      color/blue/700       → --color-blue-700
+ *      text/line height/24  → --text-line-height-24
+ * 2. 텍스트 스타일: 개선 디자인용 10개 (구분선 아래 Noto Sans KR 스타일은 예전 디자인이라 제외)
+ * 3. 그림자: Figma에 effect style이 없어 화면에 쓰인 값을 옮김
+ *
+ * 크기 값은 rem으로 변환 (1rem = 16px, 주석은 Figma 원본 px)
+ */
+:root {
+  /* ───────── 1. 변수: color ───────── */
+  --color-white-900: #ffffff;
+  --color-black-900: #000000;
+  --color-grey-900: #161616;
+  --color-grey-700: #333333;
+  --color-grey-400: #505050;
+  --color-grey-100: #d1d1d6;
+  --color-blue-900: #0c1d36;
+  --color-blue-700: #20457c;
+  --color-blue-500: #214cca;
+  --color-blue-100: #eaf2fb;
+  --color-blue-50: #f1f6fc;
+  --color-orange-700: #853c0f;
+  --color-orange-100: #fff4e5;
+  --color-red-900: #730014;
+  --color-red-700: #b00020;
+  --color-red-300: #ffd2d0;
+
+  /* ───────── 1. 변수: text/size ───────── */
+  --text-size-24: 1.5rem; /* 24px */
+  --text-size-20: 1.25rem; /* 20px */
+  --text-size-18: 1.125rem; /* 18px */
+  --text-size-16: 1rem; /* 16px */
+  --text-size-14: 0.875rem; /* 14px */
+
+  /* ───────── 1. 변수: text/line height ───────── */
+  --text-line-height-32: 2rem; /* 32px */
+  --text-line-height-28: 1.75rem; /* 28px */
+  --text-line-height-26: 1.625rem; /* 26px */
+  --text-line-height-24: 1.5rem; /* 24px */
+  --text-line-height-20: 1.25rem; /* 20px */
+
+  /* ───────── 1. 변수: text/weight ───────── */
+  --text-weight-400: 400;
+  --text-weight-500: 500;
+  --text-weight-600: 600;
+  --text-weight-700: 700;
+
+  /* ───────── 1. 변수: radius ───────── */
+  --button-radius-4: 0.25rem; /* 4px */
+  --button-radius-8: 0.5rem; /* 8px */
+  --button-radius-12: 0.75rem; /* 12px */
+  --card-radius-4: 0.25rem; /* 4px */
+  --card-radius-12: 0.75rem; /* 12px */
+
+  /* ───────── 2. 텍스트 스타일 ─────────
+   * 폰트: 모든 텍스트 스타일이 Pretendard GOV, 자간 0
+   * --typo-* 는 CSS font 단축 속성 값: 굵기 크기/행간 폰트
+   * 사용 예: font: var(--typo-section-title);
+   */
+  --font-family: 'Pretendard GOV', 'Pretendard', -apple-system, BlinkMacSystemFont,
+    'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+
+  /* 대제목 24/32 Bold */
+  --typo-title: var(--text-weight-700) var(--text-size-24) / var(--text-line-height-32) var(--font-family);
+  /* 섹션타이틀 20/28 SemiBold */
+  --typo-section-title: var(--text-weight-600) var(--text-size-20) / var(--text-line-height-28) var(--font-family);
+  /* 서브/카드타이틀 18/26 SemiBold */
+  --typo-sub-title: var(--text-weight-600) var(--text-size-18) / var(--text-line-height-26) var(--font-family);
+  /* 카드및버튼타이틀 16/26 SemiBold */
+  --typo-card-title: var(--text-weight-600) var(--text-size-16) / var(--text-line-height-26) var(--font-family);
+  /* 본문 14/24 Regular */
+  --typo-body: var(--text-weight-400) var(--text-size-14) / var(--text-line-height-24) var(--font-family);
+  /* 캡션및보조설명 14/20 Medium */
+  --typo-caption: var(--text-weight-500) var(--text-size-14) / var(--text-line-height-20) var(--font-family);
+  /* 메뉴 16/20 Bold */
+  --typo-menu: var(--text-weight-700) var(--text-size-16) / var(--text-line-height-20) var(--font-family);
+  /* 클릭 button 20/20 Bold — 선택된 버튼 */
+  --typo-button-selected: var(--text-weight-700) var(--text-size-20) / var(--text-line-height-20) var(--font-family);
+  /* 미클릭 button 18/20 Medium — 선택 안 된 버튼 */
+  --typo-button: var(--text-weight-500) var(--text-size-18) / var(--text-line-height-20) var(--font-family);
+  /* 긴급 button 14/20 Bold */
+  --typo-button-emergency: var(--text-weight-700) var(--text-size-14) / var(--text-line-height-20) var(--font-family);
+
+  /* ───────── 간격 — 추가 토큰 ─────────
+   * Figma에 간격 변수가 없어, 화면에서 반복해서 쓰인 값만 토큰으로 만듦.
+   * 한두 곳에만 쓰인 값(26, 52, 120px 등)은 컴포넌트를 만들 때 확인한다.
+   */
+  --space-4: 0.25rem; /* 4px */
+  --space-8: 0.5rem; /* 8px */
+  --space-12: 0.75rem; /* 12px */
+  --space-16: 1rem; /* 16px */
+  --space-20: 1.25rem; /* 20px */
+  --space-24: 1.5rem; /* 24px */
+  --space-32: 2rem; /* 32px */
+  --space-36: 2.25rem; /* 36px */
+  --space-64: 4rem; /* 64px */
+
+  /* ───────── 라운드 — 추가 토큰 ───────── */
+  --radius-full: 50%; /* 원형 — 탑버튼 (Figma 50×50, 라운드 25px) */
+
+  /* ───────── 접근성 — 추가 토큰 ─────────
+   * Figma에 없는 값. 접근성 기준(KWCAG 2.2, WCAG 2.2)을 위해 추가함.
+   */
+  --touch-target-min: 2.75rem; /* 44px — 터치 영역 최소 크기 (한 손 조작) */
+  --focus-ring: 0.125rem solid var(--color-blue-700); /* 2px — 키보드 포커스 표시, 흰 배경 대비 9.53 */
+  --focus-ring-offset: 0.125rem; /* 2px */
+
+  /* ───────── 3. 그림자 ───────── */
+  --shadow-floating: 0 1px 4px rgba(0, 0, 0, 0.16); /* 떠 있는 버튼 — 탑버튼 */
+  --shadow-bottom-bar: 0 -2px 4px rgba(0, 0, 0, 0.16); /* 하단 고정 영역 — 긴급원클릭서비스 (Figma 하단고정긴급 drop shadow 값) */
+  --shadow-pressed: 0 2px 8px rgba(0, 0, 0, 0.16), inset 0 2px 8px rgba(0, 0, 0, 0.16); /* 누른 상태 — 탑버튼 누름탑 */
+}

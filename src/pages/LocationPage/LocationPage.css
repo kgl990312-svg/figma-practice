@@ -1,0 +1,50 @@
+/*
+ * LocationPage — 화면 4 위치·교통
+ * 모바일 기준 (Figma 360 × 840). 이 화면만 좌우 여백 14px (Figma 그대로)
+ * 데스크톱 배치는 Figma 링크를 받은 뒤 구현한다.
+ */
+.location-page {
+  --page-gutter: 0.875rem; /* 14px — Figma 위치·교통 화면 여백. 토큰 없음 */
+}
+
+/* 네비게이션 ↔ 대제목 8px */
+.location-page__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* 섹션 사이 36px.
+ * 아래 117px은 Figma에 없는 여백 — TOP 버튼(아래 51px + 높이 50px)이 마지막 내용을 가리지 않게 */
+.location-page__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+  margin-top: var(--space-section);
+  padding-bottom: 7.3125rem; /* 117px = 51 + 50 + 16. 토큰 없음 */
+}
+
+/* 지도 — 화면 폭 전체(좌우 여백 없음), 높이 327px
+ * Figma는 지도 이미지를 크게 놓고 보건소 주변만 보이게 잘라 씀 → 같은 크기·위치로 자름 */
+.location-page__map {
+  position: relative;
+  height: 20.4375rem; /* 327px — Figma 높이. 토큰 없음 */
+  margin-inline: calc(var(--page-gutter) * -1);
+  overflow: hidden;
+}
+
+.location-page__map img {
+  position: absolute;
+  top: -9.975rem; /* -159.6px — Figma 이미지 위치 */
+  left: calc(50% - 25.411rem); /* 화면 가운데에서 -406.6px */
+  width: 51.81rem; /* 829px — Figma 이미지 크기 (628px 영역의 132%) */
+  max-width: none;
+  height: auto;
+}
+
+/* 섹션타이틀 ↔ 교통 목록 36px */
+.location-page__transport {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+}

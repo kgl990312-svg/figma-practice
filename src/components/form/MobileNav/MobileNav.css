@@ -1,0 +1,143 @@
+/*
+ * MobileNav — Figma 「모바일네비게이션」
+ * 너비는 부모(콘텐츠 영역)를 꽉 채운다.
+ *
+ * 아이콘 버튼 (사용자 결정): 보이는 모양·간격은 Figma와 같게(아이콘 24px, 간격 4px),
+ * 누르는 영역만 투명하게 넓힌다 — 위아래 44px, 바깥쪽 44px, 이웃 아이콘과 맞닿은 쪽은 간격을 반씩 나눔.
+ */
+.mobile-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 3.25rem; /* 52px — Figma 위 여백(상태 표시줄 자리 포함). 토큰 없음 */
+  padding-bottom: var(--space-12);
+}
+
+/* 왼쪽: 로고(또는 뒤로가기) + 이름 */
+.mobile-nav__brand,
+.mobile-nav__home-link {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.mobile-nav__home-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 24px 로고 칸 — Figma처럼 22px 그림을 가운데(1px 안쪽)에 놓음 */
+.mobile-nav__logo {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.5rem; /* 24px */
+  height: 1.5rem;
+}
+
+.mobile-nav__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mobile-nav__name {
+  color: var(--color-grey-900);
+  font: var(--typo-section-title); /* 섹션타이틀 20/28 SemiBold */
+}
+
+.mobile-nav__areas {
+  color: var(--color-grey-700);
+  font: var(--typo-caption); /* 캡션및보조설명 14/20 Medium */
+}
+
+/* 오른쪽: 검색 · 메뉴(또는 홈) — Figma 높이 48px, 간격 4px */
+.mobile-nav__actions {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-4);
+  min-width: 0;
+  min-height: 3rem; /* 48px — Figma 높이. 토큰 없음 */
+}
+
+/* 아이콘 버튼 — 보이는 크기 24px */
+.mobile-nav__icon-button {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.5rem; /* 24px — 아이콘 크기 */
+  height: 1.5rem;
+}
+
+/* 누르는 영역 — 투명하게 넓힘 (위아래·바깥쪽 10px, 이웃 쪽은 간격 4px의 반 2px) */
+.mobile-nav__icon-button::before {
+  content: '';
+  position: absolute;
+  inset: calc((var(--touch-target-min) - 1.5rem) / -2) calc(var(--space-4) / -2);
+}
+
+.mobile-nav__icon-button:first-child::before {
+  left: calc((var(--touch-target-min) - 1.5rem) / -2);
+}
+
+.mobile-nav__icon-button:last-child::before {
+  right: calc((var(--touch-target-min) - 1.5rem) / -2);
+}
+
+/* 검색창 — 네비게이션바클릭 */
+.mobile-nav__search {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  /* 글자와 돋보기 사이 간격 없음 — 문구가 잘리지 않도록 (사용자 요청, Figma 4px) */
+  min-width: 0;
+  /* 위아래 12px(높이 46px 유지), 좌우 8px — Figma 「검색창」 원본 컴포넌트 여백. 문구가 잘리지 않도록 (사용자 요청) */
+  padding: var(--space-12) var(--space-8);
+  border: 1px solid var(--color-grey-900); /* 1px 테두리 — 토큰 없음 */
+  border-radius: var(--button-radius-8);
+  background: var(--color-white-900);
+}
+
+.mobile-nav__search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-grey-900);
+  font: var(--typo-caption); /* 14/20 Medium */
+}
+
+.mobile-nav__search-input::placeholder {
+  color: var(--color-grey-400); /* Figma #767676 대신 토큰 (결정) */
+}
+
+/* 입력창 테두리 안쪽이라 기본 포커스 표시 대신 검색창 전체에 표시 */
+.mobile-nav__search-input:focus-visible {
+  outline: none;
+}
+
+.mobile-nav__search:focus-within {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* 검색창 안 검색 버튼 — 보이는 크기 18px, 누르는 영역은 검색창 안쪽 여백까지 */
+.mobile-nav__search-submit {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+}
+
+.mobile-nav__search-submit::before {
+  content: '';
+  position: absolute;
+  inset: calc(var(--space-12) * -1) calc(var(--space-8) * -1);
+}

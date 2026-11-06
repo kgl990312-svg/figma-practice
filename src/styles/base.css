@@ -1,0 +1,114 @@
+/* 공통 기본 스타일 */
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--text-size-14);
+  line-height: var(--text-line-height-24);
+  color: var(--color-grey-900);
+  background: var(--color-white-900);
+}
+
+/* 제목 기본 스타일 — Figma 텍스트 스타일과 대응 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-grey-900);
+}
+
+h1 {
+  font: var(--typo-title); /* 대제목 24/32 Bold — 페이지 제목 */
+}
+
+h2 {
+  font: var(--typo-section-title); /* 섹션타이틀 20/28 SemiBold — 섹션 제목 */
+}
+
+h3 {
+  font: var(--typo-sub-title); /* 서브/카드타이틀 18/26 SemiBold — 섹션 아래 제목 */
+}
+
+h4,
+h5,
+h6 {
+  font: var(--typo-body); /* 본문과 같게 */
+}
+
+/* 링크 기본 스타일
+ * 카드·버튼처럼 쓰는 링크는 주변 글자색을 따른다 (reset.css에서 밑줄 제거).
+ * 문장 안 링크(예: 위치·교통의 전화번호)만 밑줄 + blue/700 — 색만으로 구분하지 않음
+ */
+a {
+  color: inherit;
+}
+
+:where(p, li, dd, td) > a {
+  color: var(--color-blue-700);
+  text-decoration: underline;
+}
+
+/* 텍스트 스타일 — Figma 텍스트 스타일 이름과 대응 */
+.text-title {
+  /* 대제목 */
+  font-size: var(--text-size-24);
+  line-height: var(--text-line-height-32);
+  font-weight: var(--text-weight-700);
+}
+
+.text-section {
+  /* 섹션타이틀 */
+  font-size: var(--text-size-20);
+  line-height: var(--text-line-height-28);
+  font-weight: var(--text-weight-600);
+}
+
+.text-card {
+  /* 카드및버튼타이틀 */
+  font-size: var(--text-size-16);
+  line-height: var(--text-line-height-26);
+  font-weight: var(--text-weight-600);
+}
+
+.text-body {
+  /* 본문 */
+  font-size: var(--text-size-14);
+  line-height: var(--text-line-height-24);
+  font-weight: var(--text-weight-400);
+}
+
+.text-caption {
+  /* 캡션및보조설명 */
+  font-size: var(--text-size-14);
+  line-height: var(--text-line-height-20);
+  font-weight: var(--text-weight-500);
+}
+
+/* 키보드 포커스 표시 — 마우스 클릭 때는 숨기고 키보드 이동 때만 보임 */
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* 움직임 줄이기 설정을 켠 사용자에게는 애니메이션·부드러운 스크롤을 끔 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 스크린리더 전용 텍스트 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

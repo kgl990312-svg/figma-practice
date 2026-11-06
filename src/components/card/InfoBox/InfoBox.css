@@ -1,0 +1,138 @@
+/*
+ * InfoBox — Figma 「운영박스」
+ * 너비는 부모(콘텐츠 영역)를 꽉 채운다. Figma 328 × 136
+ * Figma는 줄마다 고정 px 간격(71px, 54px 등)으로 배치 → 고정 px 대신 두 칸(이름 | 내용) 같은 폭으로 나눔
+ */
+.info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-16);
+  width: 100%;
+  min-height: 8.5rem; /* 136px — Figma 높이. 토큰 없음 */
+  padding: var(--space-16);
+  border: 2px solid var(--color-orange-700); /* 2px 테두리 — 토큰 없음 */
+  border-radius: var(--card-radius-12);
+  background: var(--color-orange-100);
+}
+
+/* 줄 묶음 — 묶음 안 줄 사이 4px */
+.info-box__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.info-box__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  min-height: 1.625rem; /* 26px — 한 줄 높이 */
+}
+
+/* 왼쪽 이름 — 카드및버튼타이틀 16/26 SemiBold */
+.info-box__label {
+  color: var(--color-grey-900);
+  font: var(--typo-card-title);
+  word-break: keep-all;
+}
+
+/* 오른쪽 내용 — 캡션및보조설명 14/20 Medium, blue/900 */
+.info-box__value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  color: var(--color-blue-900);
+  font: var(--typo-caption);
+  text-align: center;
+}
+
+/* 전화번호 — 16/26 SemiBold grey/900 */
+.info-box__value--large {
+  color: var(--color-grey-900);
+  font: var(--typo-card-title);
+}
+
+.info-box__value--end {
+  justify-content: flex-end;
+}
+
+.info-box__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: var(--touch-target-min); /* 44px — 누르는 영역 */
+  margin-block: -0.5625rem; /* 26px 줄 높이 유지 — 넓힌 9px만큼 위아래로 겹침 */
+  color: inherit;
+  text-decoration: none;
+}
+
+.info-box__icon {
+  flex: none;
+}
+
+/* ───────── 화면 4 모양 (variant="split") ───────── */
+
+/* 묶음 사이 2px 구분선 (Figma Line 4, orange/700) */
+.info-box--split > .info-box__group + .info-box__group {
+  padding-top: var(--space-16);
+  border-top: 2px solid var(--color-orange-700); /* 2px 선 — 토큰 없음 */
+}
+
+.info-box--split {
+  gap: var(--space-16);
+}
+
+.info-box__split-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+/* 아이콘 + 이름 — 카드및버튼타이틀 16/26 SemiBold */
+.info-box__split-label {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--color-grey-900);
+  font: var(--typo-card-title);
+}
+
+/* 내용 — 오른쪽 끝 정렬 */
+.info-box__split-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 0;
+  color: var(--color-grey-900);
+  text-align: right;
+}
+
+/* 시간 — 16/26 SemiBold */
+.info-box__split-main {
+  font: var(--typo-card-title);
+}
+
+/* 휴무일 — 14/20 Medium */
+.info-box__split-note {
+  font: var(--typo-caption);
+  word-break: keep-all;
+}
+
+/* 24px 시계 아이콘 칸 — 안의 그림은 Figma 위치 그대로 */
+.info-box__clock {
+  position: relative;
+  flex: none;
+  width: 1.5rem; /* 24px */
+  height: 1.5rem;
+}
+
+.info-box__clock img {
+  position: absolute;
+  top: 0.073rem; /* 1.17px — Figma 그룹 위치 */
+  left: 0.073rem;
+  max-width: none;
+}

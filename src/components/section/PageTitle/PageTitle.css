@@ -1,0 +1,18 @@
+/*
+ * PageTitle — Figma 「대제목」
+ * 너비는 부모(콘텐츠 영역)를 꽉 채운다. 328 × 64
+ */
+.page-title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-16);
+  background: var(--color-blue-50);
+}
+
+/* 대제목 24/32 Bold */
+.page-title__text {
+  color: var(--color-black-900);
+  font: var(--typo-title);
+  word-break: keep-all;
+}

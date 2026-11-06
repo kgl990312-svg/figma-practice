@@ -1,0 +1,36 @@
+/*
+ * MainButton — Figma 「메인버튼」
+ * 너비는 부모(콘텐츠 영역)를 꽉 채운다.
+ */
+.main-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: 3.75rem; /* 60px — Figma 높이. 토큰 없음 */
+  padding: var(--space-16) var(--space-20);
+  border: 1px solid transparent; /* 두 종류의 크기를 같게 유지 */
+  border-radius: var(--button-radius-8);
+  font: var(--typo-card-title); /* 카드및버튼타이틀 16/26 SemiBold */
+  text-align: center;
+  text-decoration: none;
+  word-break: keep-all;
+}
+
+.main-button__icon {
+  flex: none;
+}
+
+/* 기본 — 파란 배경 */
+.main-button--primary {
+  background: var(--color-blue-700);
+  color: var(--color-white-900);
+}
+
+/* 화이트버튼 — 흰 배경, 파란 테두리 */
+.main-button--white {
+  border-color: var(--color-blue-700); /* 1px 테두리 — 토큰 없음 */
+  background: var(--color-white-900);
+  color: var(--color-blue-700);
+}

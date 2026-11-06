@@ -1,0 +1,81 @@
+/*
+ * TransportGuide — Figma 「교통안내」
+ * 너비는 부모(콘텐츠 영역)를 꽉 채운다.
+ */
+.transport-guide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* 제목 묶음 ↔ 목록 8px */
+.transport-guide__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* 제목 + 소제목, 좌우 12px, 사이 4px */
+.transport-guide__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-inline: var(--space-12);
+}
+
+/* 카드및버튼타이틀 16/26 SemiBold — 제목이 없는 묶음도 같은 높이(26px)의 빈칸 */
+.transport-guide__title {
+  min-height: var(--text-line-height-26);
+  margin: 0;
+  color: var(--color-black-900);
+  font: var(--typo-card-title);
+}
+
+/* 아이콘 + 소제목 — 캡션및보조설명 14/20 Medium */
+.transport-guide__label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin: 0;
+  color: var(--color-grey-900);
+  font: var(--typo-caption);
+}
+
+/* 20px 아이콘 칸 */
+.transport-guide__icon {
+  position: relative;
+  flex: none;
+  width: 1.25rem; /* 20px */
+  height: 1.25rem;
+}
+
+.transport-guide__glyph {
+  position: absolute;
+  max-width: none;
+}
+
+.transport-guide__glyph--subway {
+  inset: 0;
+}
+
+.transport-guide__glyph--bus {
+  top: 0.221rem; /* 3.54px — Figma 그룹 위치 */
+  left: 0.065rem; /* 1.04px */
+}
+
+.transport-guide__glyph--parking {
+  top: 0.065rem; /* 1.04px */
+  left: 0.065rem;
+}
+
+/* 목록 — 본문 14/24 Regular, 점 목록, 들여쓰기 21px, 사이 4px */
+.transport-guide__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-inline-start: 1.3125rem; /* 21px — Figma 들여쓰기. 토큰 없음 */
+  list-style: disc;
+  color: var(--color-black-900);
+  font: var(--typo-body);
+  word-break: keep-all;
+}

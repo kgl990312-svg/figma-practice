@@ -1,0 +1,28 @@
+/*
+ * MenuButton — Figma 「메뉴버튼」
+ * 너비는 정하지 않음: 부모 레이아웃(2열 그리드)에서 정한다.
+ */
+
+/* 미클릭메뉴버튼 (기본) */
+.menu-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 4.5rem; /* 72px — Figma 높이. 토큰 없음, 글자를 키우면 늘어나도록 min-height */
+  padding: var(--space-16);
+  border: 1px solid var(--color-blue-700); /* 1px 테두리 — 토큰 없음 */
+  border-radius: var(--button-radius-4);
+  background: var(--color-white-900);
+  color: var(--color-blue-700);
+  font: var(--typo-menu); /* 메뉴 16/20 Bold */
+  text-align: center;
+  word-break: keep-all;
+}
+
+/* 클릭메뉴버튼 — 선택 상태. 배경이 채워져 색 말고도 모양으로 구분됨 */
+.menu-button--selected {
+  border-color: transparent; /* Figma 클릭메뉴버튼은 테두리 없음, 크기 유지를 위해 투명 처리 */
+  background: var(--color-blue-700);
+  color: var(--color-white-900);
+}

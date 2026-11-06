@@ -1,0 +1,84 @@
+/*
+ * MainPage — 화면 1 메인
+ * 모바일 기준 (Figma 360 × 840, 좌우 여백 16px — .container)
+ * 데스크톱 배치는 Figma 링크를 받은 뒤 구현한다.
+ */
+
+/* 본문 섹션 사이 36px. 아래 164px은 하단고정긴급이 가리지 않도록 둔 여백 (Figma 공지사항영역 아래 여백) */
+.main-page__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+  margin-top: var(--space-section); /* 네비게이션 ↔ 배너 36px */
+  padding-bottom: 10.25rem; /* 164px — 하단고정긴급 높이. 토큰 없음 */
+}
+
+/* 배너 — 비율 1376:768 유지 */
+.main-page__banner {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1376 / 768;
+  object-fit: cover;
+}
+
+/* 섹션 안 요소 사이 16px */
+.main-page__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+/* 구 선택 박스 — blue/100 배경 */
+.main-page__region-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding: var(--space-16);
+  border-radius: var(--card-radius-12);
+  background: var(--color-blue-100);
+}
+
+/* 카드및버튼타이틀 16/26 SemiBold */
+.main-page__region-guide {
+  color: var(--color-black-900);
+  font: var(--typo-card-title);
+  word-break: keep-all;
+}
+
+/* 구 버튼 4개 — 한 줄에 4개, 좁은 화면(칸이 64px보다 좁아지면)에서는 줄바꿈 */
+.main-page__regions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+  gap: var(--space-8);
+}
+
+/* 통합민원 카드 2 × 2 */
+.main-page__services {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+
+.main-page__services > li {
+  display: flex;
+}
+
+/* 의료센터 카드 3개 */
+.main-page__centers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* 공지사항: 탭 ↔ 지역 버튼 16px */
+.main-page__notice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+/* 탭 3개 같은 폭 */
+.main-page__tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}

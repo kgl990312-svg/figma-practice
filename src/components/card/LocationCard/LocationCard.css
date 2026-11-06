@@ -1,0 +1,46 @@
+/*
+ * LocationCard — Figma 「위치안내」
+ * 너비는 부모(콘텐츠 영역)를 꽉 채운다. Figma 높이 136px (card/h-size/ㅣ)
+ */
+.location-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  width: 100%;
+  min-height: 8.5rem; /* 136px — Figma 높이. 토큰 없음 */
+  padding: var(--space-16);
+}
+
+/* 카드및버튼타이틀 16/26 SemiBold */
+.location-card__title {
+  color: var(--color-grey-900);
+  font: var(--typo-card-title);
+  word-break: keep-all;
+}
+
+/* 주소·전화번호 줄 사이 4px */
+.location-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* 캡션및보조설명 14/20 Medium, 이름과 값 사이 4px */
+.location-card__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--color-grey-900);
+  font: var(--typo-caption);
+}
+
+/* 전화번호 — 밑줄 + blue/700 (색만으로 구분하지 않음) */
+.location-card__phone {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target-min); /* 44px — 누르는 영역 */
+  margin-block: -0.75rem; /* 20px 줄 높이 유지 — 넓힌 만큼 위아래로 겹침 */
+  color: var(--color-blue-700);
+  text-decoration: underline;
+}

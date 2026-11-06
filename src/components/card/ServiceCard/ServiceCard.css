@@ -1,0 +1,55 @@
+/*
+ * ServiceCard — Figma 「통합서비스카드」
+ * 너비는 정하지 않음: 부모 레이아웃(2열)에서 정한다.
+ */
+
+/* 미클릭 (기본) */
+.service-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: 3.875rem; /* 62px — Figma 높이(메인 화면 60/62 혼재 → 원본 62, 결정 M). 토큰 없음 */
+  padding: var(--space-16);
+  border: 1px solid var(--color-grey-400); /* 1px 테두리 — 토큰 없음 */
+  border-radius: var(--button-radius-12);
+  background: var(--color-blue-50);
+  color: var(--color-grey-400);
+  font: var(--typo-card-title); /* 카드및버튼타이틀 16/26 SemiBold */
+  text-align: center;
+  text-decoration: none;
+  word-break: keep-all;
+}
+
+.service-card__icon {
+  flex: none;
+}
+
+/* 18px 그림을 24px 칸에 놓을 때 (금연) */
+.service-card__icon--inset {
+  margin: 0.1875rem; /* 3px — Figma 그룹 위치 */
+}
+
+.service-card__icon--pressed {
+  display: none;
+}
+
+/* 클릭 — 누르는 동안(:active). 테두리 굵기도 바뀌어 색만으로 구분하지 않음
+ * --pressed 클래스는 비교용 미리보기에서 누른 모양을 고정해 보여 줄 때만 쓴다 */
+.service-card:active,
+.service-card--pressed {
+  border: 2px solid var(--color-blue-700); /* 2px 테두리 — 토큰 없음 */
+  background: var(--color-blue-100);
+  color: var(--color-blue-700);
+}
+
+.service-card:active .service-card__icon--default,
+.service-card--pressed .service-card__icon--default {
+  display: none;
+}
+
+.service-card:active .service-card__icon--pressed,
+.service-card--pressed .service-card__icon--pressed {
+  display: block;
+}
