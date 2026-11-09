@@ -26,6 +26,7 @@ import MainButton from '../../components/button/MainButton/MainButton.jsx'
 import JurisdictionService from '../../components/section/JurisdictionService/JurisdictionService.jsx'
 import ShortcutButton from '../../components/button/ShortcutButton/ShortcutButton.jsx'
 import locationBlue from '../../assets/icons/location-blue.svg'
+import locationWhite from '../../assets/icons/location-white.svg'
 import './DistrictPage.css'
 
 function DistrictPage({ district }) {
@@ -70,6 +71,7 @@ function DistrictPage({ district }) {
               variant="white"
               label="위치보기"
               icon={locationBlue}
+              hoverIcon={locationWhite}
               href={location ? `/location?gu=${id}` : undefined}
             />
           </div>

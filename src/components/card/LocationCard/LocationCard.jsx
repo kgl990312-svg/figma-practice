@@ -7,28 +7,12 @@
  * 전화번호: 모바일은 누르면 전화 연결, 데스크톱(841px 이상)은 누르면 번호 복사 + 2초 동안 「번호를 복사했어요」
  *   (PC는 전화를 걸 수 없음 — 의료센터 카드·화면 2 전화문의와 같은 방식, 사용자 결정 2026-11-09)
  */
-import { useEffect, useState } from 'react'
+import { useCopyText } from '../../../hooks/useCopyText.js'
 import './LocationCard.css'
 
-const COPY_MESSAGE = { ok: '번호를 복사했어요', fail: '복사하지 못했어요' }
 
 function LocationCard({ district, address, phone }) {
-  const [copied, setCopied] = useState(null) // 'ok' | 'fail' | null
-
-  useEffect(() => {
-    if (!copied) return undefined
-    const timer = setTimeout(() => setCopied(null), 2000)
-    return () => clearTimeout(timer)
-  }, [copied])
-
-  async function copy() {
-    try {
-      await navigator.clipboard.writeText(phone)
-      setCopied('ok')
-    } catch {
-      setCopied('fail')
-    }
-  }
+  const { message, copy } = useCopyText()
 
   return (
     <div className="location-card">
@@ -51,12 +35,12 @@ function LocationCard({ district, address, phone }) {
                 type="button"
                 className="location-card__phone location-card__phone--desktop"
                 aria-label={`전화번호 ${phone} 복사`}
-                onClick={copy}
+                onClick={() => copy(phone)}
               >
-                {copied ? COPY_MESSAGE[copied] : phone}
+                {message ?? phone}
               </button>
               <span className="sr-only" role="status">
-                {copied ? COPY_MESSAGE[copied] : ''}
+                {message ?? ''}
               </span>
             </dd>
           </div>

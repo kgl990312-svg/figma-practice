@@ -35,8 +35,13 @@
   color: var(--color-blue-700);
 }
 
-/* 데스크톱 (841px 이상) — 화이트버튼에 마우스를 올리면(키보드 포커스 포함) 연파랑 배경
- * Figma에 호버 상태 없음 → 의료센터 카드 호버와 같은 blue/100 (사용자 결정 2026-11-09) */
+/* 흰 아이콘 — 데스크톱 화이트버튼 호버 때만 보임 */
+.main-button__icon--hover {
+  display: none;
+}
+
+/* 데스크톱 (841px 이상) — 화이트버튼에 마우스를 올리면(키보드 포커스 포함)
+ * 기본 모습(파란 배경·흰 글자·흰 아이콘)으로 바뀜. Figma 「메인버튼」의 기본 변형 색 (사용자 결정) */
 @media (min-width: 52.5625em) {
   .main-button--white {
     cursor: pointer;
@@ -44,6 +49,17 @@
 
   .main-button--white:hover,
   .main-button--white:focus-visible {
-    background: var(--color-blue-100);
+    background: var(--color-blue-700);
+    color: var(--color-white-900);
+  }
+
+  .main-button--white:hover .main-button__icon:not(.main-button__icon--hover),
+  .main-button--white:focus-visible .main-button__icon:not(.main-button__icon--hover) {
+    display: none;
+  }
+
+  .main-button--white:hover .main-button__icon--hover,
+  .main-button--white:focus-visible .main-button__icon--hover {
+    display: block;
   }
 }

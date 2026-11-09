@@ -20,37 +20,14 @@
  *
  * Figma와 다른 점: 「전화문의」 글자가 Figma에서는 Inter 폰트 → Pretendard GOV로 맞춤 (결정 J)
  */
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useCopyText } from '../../../hooks/useCopyText.js'
 import phoneGrey from '../../../assets/icons/phone-grey.svg'
 import phoneBlue from '../../../assets/icons/phone-blue.svg'
 import CallModal from '../../section/CallModal/CallModal.jsx'
 import './MedicalCenterCard.css'
 
 const toTel = (phone) => `tel:${phone.replaceAll('-', '')}`
-const COPIED_TEXT = '번호를 복사했어요'
-const COPY_FAILED_TEXT = '복사하지 못했어요'
-
-// 데스크톱 번호 복사 — copied: 방금 누른 번호와 성공 여부 { phone, ok }, 2초 뒤 사라짐
-function useCopyPhone() {
-  const [copied, setCopied] = useState(null)
-
-  useEffect(() => {
-    if (!copied) return undefined
-    const timer = setTimeout(() => setCopied(null), 2000)
-    return () => clearTimeout(timer)
-  }, [copied])
-
-  async function copy(phone) {
-    try {
-      await navigator.clipboard.writeText(phone)
-      setCopied({ phone, ok: true })
-    } catch {
-      setCopied({ phone, ok: false })
-    }
-  }
-
-  return [copied, copy]
-}
 
 function CallIcons() {
   // 아이콘은 장식이라 alt를 비움
@@ -65,13 +42,13 @@ function CallIcons() {
 // showPressed: 비교용 미리보기에서 누른 모양을 고정해 보여 줄 때만 사용 (실제 화면에서는 쓰지 않음)
 function MedicalCenterCard({ name, phone, regions, showPressed = false }) {
   const [open, setOpen] = useState(false)
-  const [copied, copy] = useCopyPhone()
-  const copiedText = (target) =>
-    copied?.phone === target ? (copied.ok ? COPIED_TEXT : COPY_FAILED_TEXT) : null
+  const { copiedText: lastCopied, message, copy } = useCopyText()
+  // 방금 복사한 번호 자리에만 결과 문구를 보여 줌
+  const copiedText = (target) => (lastCopied === target ? message : null)
   // 복사 결과를 화면 낭독기에 알려 주는 칸 (눈에는 안 보임)
   const status = (
     <span className="sr-only" role="status">
-      {copied ? `${name} ${copied.ok ? COPIED_TEXT : COPY_FAILED_TEXT}` : ''}
+      {message ? `${name} ${message}` : ''}
     </span>
   )
   const className = `medical-center-card${showPressed ? ' medical-center-card--pressed' : ''}`
