@@ -44,3 +44,24 @@
   color: var(--color-blue-700);
   text-decoration: underline;
 }
+
+/* 모바일은 전화 연결 링크, 데스크톱은 번호 복사 버튼 (CSS로 하나만 보임) */
+.location-card__phone--desktop {
+  display: none;
+  cursor: pointer;
+}
+
+@media (min-width: 52.5625em) {
+  .location-card__phone--mobile {
+    display: none;
+  }
+
+  .location-card__phone--desktop {
+    display: inline-flex;
+  }
+
+  .location-card__phone--desktop:hover,
+  .location-card__phone--desktop:focus-visible {
+    background: var(--color-blue-100);
+  }
+}

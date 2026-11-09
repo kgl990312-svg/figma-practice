@@ -1,7 +1,7 @@
 /*
  * LocationPage — 화면 4 위치·교통
  * 모바일 기준 (Figma 360 × 840). 이 화면만 좌우 여백 14px (Figma 그대로)
- * 데스크톱 배치는 Figma 링크를 받은 뒤 구현한다.
+ * 데스크톱 (841px 이상) — 파일 아래쪽 미디어쿼리
  */
 .location-page {
   --page-gutter: 0.875rem; /* 14px — Figma 위치·교통 화면 여백. 토큰 없음 */
@@ -43,4 +43,86 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-section);
+}
+
+/* 모바일: 두 칸 묶음은 그냥 세로로 쌓임 (섹션 사이 36px) */
+.location-page__columns,
+.location-page__column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+}
+
+/* ───────── 모바일 / 데스크톱 전환 ───────── */
+.location-page__nav-desktop,
+.location-page__desktop-head {
+  display: none;
+}
+
+/* ───────── 데스크톱 (841px 이상) — Figma 「데스크탑7(1440px-)」 node 3466:3638 ───────── */
+@media (min-width: 52.5625em) {
+  /* 좌우 여백은 다른 화면과 같은 16px (모바일만 14px) */
+  .location-page {
+    --page-gutter: var(--space-16);
+  }
+
+  .location-page__top,
+  .location-page__top-button {
+    display: none;
+  }
+
+  .location-page__nav-desktop {
+    display: block;
+  }
+
+  /* TOP 버튼이 없으므로 아래 여백 64px */
+  .location-page__content {
+    padding-bottom: var(--space-section);
+  }
+
+  /* 제목 ↔ 구 버튼 64px (Figma) */
+  .location-page__desktop-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-section);
+  }
+
+  /* 섹션타이틀 20/28 SemiBold */
+  .location-page__desktop-title {
+    color: var(--color-grey-900);
+    font: var(--typo-section-title);
+  }
+
+  /* 구 버튼 4개 — 같은 폭, 사이 36px, 안쪽 위아래 24px·좌우 16px (Figma) */
+  .location-page__regions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-36);
+    padding: var(--space-24) var(--space-16);
+  }
+
+  /* 2칸: 왼쪽 위치·지도 | 오른쪽 운영시간·교통 (칸 사이 64px) */
+  .location-page__columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--space-64);
+  }
+
+  /* 왼쪽: 위치 안내 ↔ 지도 24px */
+  .location-page__column {
+    gap: var(--space-24);
+  }
+
+  /* 오른쪽: 운영시간 박스 ↔ 교통 36px */
+  .location-page__column--info {
+    gap: var(--space-36);
+  }
+
+  /* 지도 — 칸 폭에 맞추고 Figma 비율 608:448 */
+  .location-page__map {
+    height: auto;
+    aspect-ratio: 608 / 448;
+    margin-inline: 0;
+  }
 }
