@@ -6,8 +6,10 @@
 .medical-support-button {
   display: flex;
   align-items: flex-start;
+  justify-content: center; /* 가운데 정렬 — Figma와 같게 (사용자 결정) */
   gap: var(--space-4);
   width: 100%;
+  text-align: center;
   color: var(--color-grey-900);
   font: var(--typo-body); /* 본문 14/24 Regular */
   word-break: keep-all;
