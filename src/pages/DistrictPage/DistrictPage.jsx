@@ -15,8 +15,10 @@
  *     Figma 처음 문구 「관할서비스」 → 행정 용어 대신 쉬운 말로 바꿈 (사용자 결정 2026-11-09)
  *   Figma 설명 자리의 「내지역버튼>」은 들어온 경로 메모 → 대신 네비게이션 아래 브레드크럼 「홈 > ○○보건소」 (사용자 결정)
  *   「○○보건소」 제목과 전화문의·위치보기 버튼을 파란 테두리 상자에 넣고 버튼은 나란히
- *   전화문의: 모바일은 전화 연결, 데스크톱은 누르면 번호 복사 (사용자 결정 3A)
+ *   전화문의: 데스크톱은 누르면 번호 복사 (사용자 결정 3A)
+ *     모바일은 바로 걸지 않고 치매안심센터처럼 연결 상자(CallModal)를 띄운 뒤, 번호를 누르면 전화 연결 (사용자 결정 2026-11-09)
  */
+import { useState } from 'react'
 import MobileNav from '../../components/form/MobileNav/MobileNav.jsx'
 import DesktopNav from '../../components/form/DesktopNav/DesktopNav.jsx'
 import SectionTitle from '../../components/section/SectionTitle/SectionTitle.jsx'
@@ -25,6 +27,7 @@ import Breadcrumb from '../../components/section/Breadcrumb/Breadcrumb.jsx'
 import PageTitle from '../../components/section/PageTitle/PageTitle.jsx'
 import MainButton from '../../components/button/MainButton/MainButton.jsx'
 import JurisdictionService from '../../components/section/JurisdictionService/JurisdictionService.jsx'
+import CallModal from '../../components/section/CallModal/CallModal.jsx'
 import ShortcutButton from '../../components/button/ShortcutButton/ShortcutButton.jsx'
 import locationBlue from '../../assets/icons/location-blue.svg'
 import locationWhite from '../../assets/icons/location-white.svg'
@@ -32,6 +35,7 @@ import './DistrictPage.css'
 
 function DistrictPage({ district }) {
   const { id, label, title, phone, location } = district
+  const [callOpen, setCallOpen] = useState(false)
 
   return (
     <div className="district-page container">
@@ -61,7 +65,13 @@ function DistrictPage({ district }) {
             {phone && (
               <>
                 <div className="district-page__mobile-only">
-                  <MainButton variant="white" label={`전화문의 ${phone}`} href={`tel:${phone.replaceAll('-', '')}`} />
+                  <MainButton variant="white" label={`전화문의 ${phone}`} hasPopup onClick={() => setCallOpen(true)} />
+                  <CallModal
+                    open={callOpen}
+                    onClose={() => setCallOpen(false)}
+                    title={`${title} 전화 연결`}
+                    items={[{ label: title, phone }]}
+                  />
                 </div>
                 <div className="district-page__desktop-only">
                   <MainButton variant="white" label={`전화문의 ${phone}`} copyText={phone} />

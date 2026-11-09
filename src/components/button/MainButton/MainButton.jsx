@@ -10,6 +10,7 @@
  * href가 있으면 링크(전화 tel:, 화면 이동), 없으면 버튼으로 동작한다.
  * copyText가 있으면 누를 때 그 글자(전화번호)를 복사하고 2초 동안 「번호를 복사했어요」를 보여 준다
  *   — 데스크톱 전화문의 버튼용 (PC는 전화를 걸 수 없음, 사용자 결정 2026-11-09. 의료센터 카드와 같은 방식)
+ * hasPopup이 있으면 누를 때 모달이 열리는 버튼임을 알림 (aria-haspopup="dialog") — 화면 2 모바일 전화문의
  * 아이콘 기본값은 Figma처럼 전화 아이콘, 다른 아이콘은 icon에 이미지 주소를 넘긴다.
  * 데스크톱 화이트버튼은 마우스를 올리면 기본 모습(파란 배경·흰 글자)으로 바뀜 → 흰 아이콘은 hoverIcon (기본: 흰 전화 아이콘)
  */
@@ -20,7 +21,7 @@ import './MainButton.css'
 
 const DEFAULT_ICON = { primary: phoneWhite, white: phoneBlue }
 
-function MainButton({ label, variant = 'primary', icon, hoverIcon, href, onClick, copyText }) {
+function MainButton({ label, variant = 'primary', icon, hoverIcon, href, onClick, copyText, hasPopup = false }) {
   const { message, copy } = useCopyText()
 
   const className = `main-button main-button--${variant}`
@@ -65,7 +66,7 @@ function MainButton({ label, variant = 'primary', icon, hoverIcon, href, onClick
   }
 
   return (
-    <button type="button" className={className} onClick={onClick}>
+    <button type="button" className={className} aria-haspopup={hasPopup ? 'dialog' : undefined} onClick={onClick}>
       {content}
     </button>
   )

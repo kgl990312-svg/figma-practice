@@ -70,3 +70,18 @@
   color: var(--color-grey-400);
   font: var(--typo-caption);
 }
+
+/* 데스크톱 번호 복사 버튼(copyText) — 모바일에서는 숨기고 tel: 버튼을 보여 준다 */
+.sub-click-button__button--desktop {
+  display: none;
+}
+
+@media (min-width: 52.5625em) {
+  .sub-click-button__button--desktop {
+    display: flex;
+  }
+
+  .sub-click-button__button--mobile {
+    display: none;
+  }
+}

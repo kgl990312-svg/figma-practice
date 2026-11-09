@@ -9,8 +9,13 @@
  * Figma에 hover / disabled 상태는 없음 → 만들지 않음
  *
  * Figma와 다른 점: 미클릭 50px, 클릭 52px → 두 상태 모두 최소 50px (결정 B)
+ *
+ * copyText가 있으면 데스크톱(841px 이상)에서는 desktopLabel(번호가 들어간 글자)을 보여 주고,
+ * 누르면 번호를 복사해 2초 동안 「번호를 복사했어요」를 보여 준다 — PC는 전화를 걸 수 없음 (사용자 결정 2026-11-09)
+ * 모바일에서는 그대로 label + href(tel:) 연결. 예: 화면 2 치과주치의 전화문의
  */
 import { useId } from 'react'
+import { useCopyText } from '../../../hooks/useCopyText.js'
 import fileBlue from '../../../assets/icons/file-blue.svg'
 import fileWhite from '../../../assets/icons/file-white.svg'
 import phoneBlue from '../../../assets/icons/phone-blue.svg'
@@ -27,17 +32,18 @@ const ICONS = {
 }
 
 // showPressed: 비교용 미리보기에서 누른 모양을 고정해 보여 줄 때만 사용 (실제 화면에서는 쓰지 않음)
-function SubClickButton({ label, icon, caption, href, newWindow = false, onClick, showPressed = false }) {
+function SubClickButton({ label, icon, caption, href, newWindow = false, onClick, showPressed = false, copyText, desktopLabel }) {
   const captionId = useId()
+  const { message, copy } = useCopyText()
   const [iconDefault, iconPressed] = icon ? ICONS[icon] : []
   // 파일 아이콘은 Figma 원본이 20px 칸 안의 14.8×17.3 그림 → 같은 크기로 놓고 Figma 위치만큼 여백
   const isFile = icon === 'file'
   const [w, h] = isFile ? [14.8125, 17.3125] : [20, 20]
   const iconClass = `sub-click-button__icon${isFile ? ' sub-click-button__icon--file' : ''}`
   const className = `sub-click-button__button${showPressed ? ' sub-click-button__button--pressed' : ''}`
-  const content = (
+  const renderContent = (text) => (
     <>
-      <span className="sub-click-button__label">{label}</span>
+      <span className="sub-click-button__label">{text}</span>
       {/* 아이콘은 장식이라 alt를 비움 */}
       {iconDefault && (
         <>
@@ -48,13 +54,36 @@ function SubClickButton({ label, icon, caption, href, newWindow = false, onClick
       {newWindow && <span className="sr-only">(새 창)</span>}
     </>
   )
+  const content = renderContent(label)
   const describedBy = caption ? captionId : undefined
+
+  // 데스크톱 복사 버튼 — 모바일용 버튼과 함께 그려 두고 CSS로 화면 폭에 따라 하나만 보여 준다
+  const desktopLabelText = desktopLabel ?? label
+  const copyButton = copyText && (
+    <>
+      <button
+        type="button"
+        className={`${className} sub-click-button__button--desktop`}
+        aria-label={`${desktopLabelText} 번호 복사`}
+        aria-describedby={describedBy}
+        onClick={() => copy(copyText)}
+      >
+        {renderContent(message ?? desktopLabelText)}
+      </button>
+      {/* 복사 결과를 화면 낭독기에 알려 주는 칸 (눈에는 안 보임) */}
+      <span className="sr-only" role="status">
+        {message ?? ''}
+      </span>
+    </>
+  )
+  const mobileClass = copyText ? `${className} sub-click-button__button--mobile` : className
 
   return (
     <div className="sub-click-button">
+      {copyButton}
       {href ? (
         <a
-          className={className}
+          className={mobileClass}
           href={href}
           aria-describedby={describedBy}
           {...(newWindow ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
@@ -62,7 +91,7 @@ function SubClickButton({ label, icon, caption, href, newWindow = false, onClick
           {content}
         </a>
       ) : (
-        <button type="button" className={className} aria-describedby={describedBy} onClick={onClick}>
+        <button type="button" className={mobileClass} aria-describedby={describedBy} onClick={onClick}>
           {content}
         </button>
       )}

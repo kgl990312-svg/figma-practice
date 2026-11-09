@@ -35,6 +35,8 @@ function AccordionSection({ label, body, buttons = [] }) {
               caption={button.caption}
               href={button.href || undefined}
               newWindow={Boolean(button.href) && !button.href.startsWith('tel:')}
+              copyText={button.copyText}
+              desktopLabel={button.desktopLabel}
             />
           ))}
         </div>
