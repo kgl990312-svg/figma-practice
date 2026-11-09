@@ -1,47 +1,187 @@
 /*
  * MedicalCenterCard — Figma 컴포넌트 「의료지원센터」 (node 1273:1726)
  * 메인 화면 「수원시 의료센터」의 센터 카드 (어울림건강지원센터 · 정신보건센터 · 치매안심센터)
- * 누르면 전화가 바로 연결된다 (tel:, 이동 안내 팝업 없음 — PRD 6-1)
  *
  * 상태 (Figma 「속성 1」)
  *   기본 → 연한 파란 배경, 회색 테두리, 「전화문의」 회색
  *   클릭 → 누르는 동안 (CSS :active — 연파랑 배경, 굵은 남색 테두리, 「전화문의」 파랑)
  * Figma에 hover / disabled 상태는 없음 → 만들지 않음
  *
+ * 모바일 / 데스크톱 (사용자 결정, 2026-11-09)
+ *   모바일(841px 미만): 「전화문의」 — 누르면 전화 연결(tel:, 이동 안내 팝업 없음 — PRD 6-1)
+ *   데스크톱(841px 이상): 「전화문의」 대신 전화번호를 진하게 보여 줌 (PC는 전화를 걸 수 없음)
+ *     누르면 번호를 복사하고 2초 동안 「번호를 복사했어요」 표시, 마우스를 올리면 누른 모양
+ *   두 모양을 모두 그려 두고 CSS로 하나만 보이게 한다 (숨긴 쪽은 화면 낭독기·키보드에서도 빠짐)
+ *
+ * 구마다 번호가 다른 센터 (regions — 치매안심센터, 사용자 결정 1A)
+ *   모바일: 카드를 누르면 아래에 구 버튼 4개가 펼쳐지고, 구 버튼을 누르면 그 구 센터로 전화 연결
+ *   데스크톱: 펼치지 않고 카드 안에 「구 이름 + 번호」 4개를 바로 보여 줌 — 번호마다 누르면 복사
+ *   Figma에 없는 모양 → 구 버튼은 공지 지역 버튼(「공지버튼완본」)과 같은 모양으로 맞춤
+ *
  * Figma와 다른 점: 「전화문의」 글자가 Figma에서는 Inter 폰트 → Pretendard GOV로 맞춤 (결정 J)
  */
+import { useEffect, useId, useState } from 'react'
 import phoneGrey from '../../../assets/icons/phone-grey.svg'
 import phoneBlue from '../../../assets/icons/phone-blue.svg'
+import chevronDown from '../../../assets/icons/chevron-down.svg'
+import chevronUp from '../../../assets/icons/chevron-up.svg'
 import './MedicalCenterCard.css'
 
-// showPressed: 비교용 미리보기에서 누른 모양을 고정해 보여 줄 때만 사용 (실제 화면에서는 쓰지 않음)
-function MedicalCenterCard({ name, phone, showPressed = false }) {
-  const className = `medical-center-card${showPressed ? ' medical-center-card--pressed' : ''}`
-  const content = (
+const toTel = (phone) => `tel:${phone.replaceAll('-', '')}`
+const COPIED_TEXT = '번호를 복사했어요'
+const COPY_FAILED_TEXT = '복사하지 못했어요'
+
+// 데스크톱 번호 복사 — copied: 방금 누른 번호와 성공 여부 { phone, ok }, 2초 뒤 사라짐
+function useCopyPhone() {
+  const [copied, setCopied] = useState(null)
+
+  useEffect(() => {
+    if (!copied) return undefined
+    const timer = setTimeout(() => setCopied(null), 2000)
+    return () => clearTimeout(timer)
+  }, [copied])
+
+  async function copy(phone) {
+    try {
+      await navigator.clipboard.writeText(phone)
+      setCopied({ phone, ok: true })
+    } catch {
+      setCopied({ phone, ok: false })
+    }
+  }
+
+  return [copied, copy]
+}
+
+function CallIcons() {
+  // 아이콘은 장식이라 alt를 비움
+  return (
     <>
-      <span className="medical-center-card__name">{name}</span>
-      <span className="medical-center-card__call">
-        전화문의
-        {/* 아이콘은 장식이라 alt를 비움 */}
-        <img className="medical-center-card__icon medical-center-card__icon--default" src={phoneGrey} alt="" width="20" height="20" />
-        <img className="medical-center-card__icon medical-center-card__icon--pressed" src={phoneBlue} alt="" width="20" height="20" />
-      </span>
+      <img className="medical-center-card__icon medical-center-card__icon--default" src={phoneGrey} alt="" width="20" height="20" />
+      <img className="medical-center-card__icon medical-center-card__icon--pressed" src={phoneBlue} alt="" width="20" height="20" />
     </>
   )
+}
+
+// showPressed: 비교용 미리보기에서 누른 모양을 고정해 보여 줄 때만 사용 (실제 화면에서는 쓰지 않음)
+function MedicalCenterCard({ name, phone, regions, showPressed = false }) {
+  const [open, setOpen] = useState(false)
+  const [copied, copy] = useCopyPhone()
+  const regionListId = useId()
+  const copiedText = (target) =>
+    copied?.phone === target ? (copied.ok ? COPIED_TEXT : COPY_FAILED_TEXT) : null
+  // 복사 결과를 화면 낭독기에 알려 주는 칸 (눈에는 안 보임)
+  const status = (
+    <span className="sr-only" role="status">
+      {copied ? `${name} ${copied.ok ? COPIED_TEXT : COPY_FAILED_TEXT}` : ''}
+    </span>
+  )
+  const className = `medical-center-card${showPressed ? ' medical-center-card--pressed' : ''}`
+  const nameEl = <span className="medical-center-card__name">{name}</span>
+
+  // 구마다 번호가 다른 센터 (치매안심센터)
+  if (regions) {
+    return (
+      <div className="medical-center-card-group">
+        {/* 모바일 — 누르면 구 버튼 펼치기 */}
+        <div className="medical-center-card__mobile">
+          <button
+            type="button"
+            className={className}
+            aria-expanded={open}
+            aria-controls={regionListId}
+            onClick={() => setOpen(!open)}
+          >
+            {nameEl}
+            <span className="medical-center-card__call">
+              전화문의
+              <img className="medical-center-card__icon" src={open ? chevronUp : chevronDown} alt="" width="20" height="20" />
+            </span>
+          </button>
+          <ul id={regionListId} className="medical-center-card__regions" hidden={!open}>
+            {regions.map((region) => (
+              <li key={region.label}>
+                <a
+                  className="medical-center-card__region"
+                  href={toTel(region.phone)}
+                  aria-label={`${region.label}구 ${name} 전화문의 ${region.phone}`}
+                >
+                  {region.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* 데스크톱 — 구별 번호를 바로 보여 줌, 번호를 누르면 복사 */}
+        <div className="medical-center-card__desktop">
+          <div className={`${className} medical-center-card--static medical-center-card--regions`}>
+            {nameEl}
+            <ul className="medical-center-card__numbers">
+              {regions.map((region) => (
+                <li key={region.label}>
+                  <button
+                    type="button"
+                    className="medical-center-card__number"
+                    aria-label={`${region.label}구 ${name} 전화번호 ${region.phone} 복사`}
+                    onClick={() => copy(region.phone)}
+                  >
+                    <span className="medical-center-card__number-label">{region.label}</span>
+                    {copiedText(region.phone) ?? region.phone}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {status}
+        </div>
+      </div>
+    )
+  }
 
   // 전화번호가 없으면 링크가 아닌 카드 모양만 보여 준다 (번호를 지어내지 않음)
   if (!phone) {
-    return <div className={className}>{content}</div>
+    return (
+      <div className={className}>
+        {nameEl}
+        <span className="medical-center-card__call">
+          전화문의
+          <CallIcons />
+        </span>
+      </div>
+    )
   }
 
   return (
-    <a
-      className={className}
-      href={`tel:${phone.replaceAll('-', '')}`}
-      aria-label={`${name} 전화문의 ${phone}`}
-    >
-      {content}
-    </a>
+    <div className="medical-center-card-group">
+      {/* 모바일 — 누르면 전화 연결 */}
+      <div className="medical-center-card__mobile">
+        <a className={className} href={toTel(phone)} aria-label={`${name} 전화문의 ${phone}`}>
+          {nameEl}
+          <span className="medical-center-card__call">
+            전화문의
+            <CallIcons />
+          </span>
+        </a>
+      </div>
+
+      {/* 데스크톱 — 번호를 진하게 보여 주고, 누르면 번호 복사 */}
+      <div className="medical-center-card__desktop">
+        <button
+          type="button"
+          className={`${className} medical-center-card--copy`}
+          aria-label={`${name} 전화번호 ${phone} 복사`}
+          onClick={() => copy(phone)}
+        >
+          {nameEl}
+          <span className="medical-center-card__call">
+            {copiedText(phone) ?? phone}
+            <CallIcons />
+          </span>
+        </button>
+        {status}
+      </div>
+    </div>
   )
 }
 

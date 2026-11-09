@@ -5,7 +5,8 @@
  * 상태 (Figma 변형 「지역색깔」)
  *   selected = true  → 지역선택   (파란 배경, 흰 글자)
  *   selected = false → 지역미선택 (흰 배경, 회색 테두리)
- * Figma에 hover / pressed / disabled 상태는 없음 → 만들지 않음
+ * Figma에 hover / pressed / disabled 상태는 없음
+ *   데스크톱만 마우스를 올리면 지역선택 모습 (사용자 결정, RegionButton.css)
  */
 import './RegionButton.css'
 

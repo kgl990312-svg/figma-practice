@@ -35,8 +35,17 @@ const SERVICES = [
   { label: '금연 서비스', icon: 'noSmoking', open: 'no-smoking' },
 ]
 
-// 전화번호는 아직 받지 못해 비워 둠 → 카드 모양만 보임 (번호를 받으면 phone에 채움)
-const MEDICAL_CENTERS = [{ name: '어울림건강지원센터' }, { name: '정신보건센터' }, { name: '치매안심센터' }]
+// 의료센터 — phone이 있으면 카드를 누를 때 전화 연결(tel:), 없으면 카드 모양만 보임
+// 번호 출처: 수원시보건소 홈페이지 (사용자 확인, 2026-11-09)
+// 치매안심센터는 주민등록상 주소지 구마다 번호가 다름 → 구별 번호(districts.js dementiaPhone)를 regions로 넘김
+const MEDICAL_CENTERS = [
+  { name: '어울림건강지원센터', phone: '031-5191-0162' },
+  { name: '정신보건센터', phone: '031-253-5737' },
+  {
+    name: '치매안심센터',
+    regions: DISTRICTS.map((district) => ({ label: district.label, phone: district.dementiaPhone })),
+  },
+]
 
 const NOTICE_TABS = ['보건소식', '고시·공고', '카드뉴스']
 
@@ -151,7 +160,7 @@ function MainPage() {
           <ul className="main-page__centers">
             {MEDICAL_CENTERS.map((center) => (
               <li key={center.name}>
-                <MedicalCenterCard name={center.name} phone={center.phone} />
+                <MedicalCenterCard name={center.name} phone={center.phone} regions={center.regions} />
               </li>
             ))}
           </ul>

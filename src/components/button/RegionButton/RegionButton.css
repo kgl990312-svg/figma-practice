@@ -27,3 +27,16 @@
   color: var(--color-white-900);
   font: var(--typo-button-selected); /* 클릭 button 20/20 Bold */
 }
+
+/* 데스크톱 (841px 이상) — 마우스를 올리면 지역선택 모습 (사용자 결정, Figma에 호버 상태 없음)
+ * 모바일은 누르면 지역선택 모습이 된 뒤 바로 그 구 화면으로 이동.
+ * 버튼 폭·높이는 칸이 정하므로 글자가 20px로 커져도 옆 버튼이 밀리지 않음. 키보드 포커스도 같게 */
+@media (min-width: 52.5625em) {
+  .region-button:hover,
+  .region-button:focus-visible {
+    border-color: transparent;
+    background: var(--color-blue-700);
+    color: var(--color-white-900);
+    font: var(--typo-button-selected);
+  }
+}
