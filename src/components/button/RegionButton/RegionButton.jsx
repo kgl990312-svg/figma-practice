@@ -15,7 +15,7 @@
  */
 import './RegionButton.css'
 
-function RegionButton({ label, selected = false, size, current = false, onClick }) {
+function RegionButton({ label, selected = false, size, current = false, describedBy, onClick }) {
   const className = `region-button${selected ? ' region-button--selected' : ''}${size === 'small' ? ' region-button--small' : ''}`
   return (
     <button
@@ -23,6 +23,7 @@ function RegionButton({ label, selected = false, size, current = false, onClick 
       className={className}
       aria-pressed={current ? undefined : selected}
       aria-current={current ? 'page' : undefined}
+      aria-describedby={describedBy}
       onClick={onClick}
     >
       {label}

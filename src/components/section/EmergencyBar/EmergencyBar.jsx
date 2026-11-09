@@ -8,6 +8,7 @@
  *   - 누르는 동안: Figma 「Property 1=클릭」(node 2402:3074) — 빨간 배경, 흰 글자·흰 아이콘
  *   - 접힘: Figma 「Property 1=접기」(node 2402:3073) — 배경 red/300, 높이 64px
  *   - 버튼은 이동 안내 팝업 없이 바로 연결 — 주소를 아직 받지 못해 href가 비어 있으면 버튼 모양만 보여 줌
+ *   - 외부 사이트(http로 시작)는 새 탭에서 열고, 화면 낭독기에 「새 창」을 알려 줌 (사용자 결정 2026-11-09)
  *
  * Figma와 다른 점 (사용자 결정)
  *   - 휴일지킴이 보조 문구: 「(야간·휴일진료)」 → 「(야간·휴일 약국)」
@@ -29,9 +30,12 @@ import chevronUp from '../../../assets/icons/chevron-up.svg'
 import './EmergencyBar.css'
 
 const EMERGENCY_SERVICES = [
-  { lines: ['휴일지킴이', '(야간·휴일 약국)'], icon: pharmacyRed, iconPressed: pharmacyWhite, href: '' },
-  { lines: ['자동심장', '충격기찾기'], icon: heartRed, iconPressed: heartWhite, href: '' },
-  { lines: ['달빛어린이병원', '(야간·휴일진료)'], icon: moonRed, iconPressed: moonWhite, href: '' },
+  // 휴일지킴이약국 (대한약사회) — 사용자 전달 2026-11-09
+  { lines: ['휴일지킴이', '(야간·휴일 약국)'], icon: pharmacyRed, iconPressed: pharmacyWhite, href: 'https://www.pharm114.or.kr/' },
+  // 자동심장충격기(AED) 찾기 — 응급의료포털 E-Gen (중앙응급의료센터), 로그인 없이 지도 검색. 사용자 전달 2026-11-09
+  { lines: ['자동심장', '충격기찾기'], icon: heartRed, iconPressed: heartWhite, href: 'https://www.e-gen.or.kr/egen/search_aed.do' },
+  // 수원시 달빛어린이병원 목록 — 수원시보건소 홈페이지 (병원·전화·운영시간·협약약국). 사용자 전달 2026-11-09
+  { lines: ['달빛어린이병원', '(야간·휴일진료)'], icon: moonRed, iconPressed: moonWhite, href: 'https://health.suwon.go.kr/sub.asp?page_code=sub0612' },
 ]
 
 function EmergencyBar({ services = EMERGENCY_SERVICES, defaultOpen = true }) {
@@ -85,8 +89,13 @@ function EmergencyBar({ services = EMERGENCY_SERVICES, defaultOpen = true }) {
           return (
             <li key={service.lines[0]} className="emergency-bar__item">
               {service.href ? (
-                <a className="emergency-bar__button" href={service.href}>
+                <a
+                  className="emergency-bar__button"
+                  href={service.href}
+                  {...(service.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
                   {content}
+                  {service.href.startsWith('http') && <span className="sr-only">(새 창)</span>}
                 </a>
               ) : (
                 <button type="button" className="emergency-bar__button">

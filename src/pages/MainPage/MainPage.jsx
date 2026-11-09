@@ -127,13 +127,14 @@ function MainPage() {
                   <RegionButton
                     label={item.label}
                     selected={region === item.label}
+                    describedBy="main-medical-support"
                     onClick={() => selectRegion(item)}
                   />
                 </li>
               ))}
             </ul>
           </div>
-          <MedicalSupportButton />
+          <MedicalSupportButton id="main-medical-support" />
         </section>
 
         <section className="main-page__section" aria-labelledby="main-services">

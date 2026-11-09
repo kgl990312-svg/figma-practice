@@ -19,7 +19,9 @@ export const SERVICES = [
         body: '- 매독,결핵,소변검사4종 \n 수수료 28,080원\n 처리기간\n5일(주말·공휴일제외)',
         buttons: [
           { label: '가까운보건소방문', href: '' },
-          { label: '온라인발급하기', icon: 'file', caption: '정부24 페이지이동', href: '' },
+          // 정부24 「보건소 증명문서 발급」 안내 — 건강진단결과서(보건증)·건강진단서 모두 발급, 온라인 무료
+          // (안내는 로그인 없이, 신청은 본인 인증) — 사용자 결정 2026-11-09
+          { label: '온라인발급하기', icon: 'file', caption: '정부24 페이지이동', href: 'https://www.gov.kr/portal/service/serviceInfo/PTR000051625' },
         ],
       },
     ],
@@ -35,7 +37,8 @@ export const SERVICES = [
       {
         label: '표준 예방접종',
         body: '국가필수예방접종 보건소 접종 미실시, 위탁기관에서 예방접종을 시행합니다',
-        buttons: [{ label: '위탁기관확인하기', caption: '예방접종도우미사이트 이동', href: '' }],
+        // 예방접종도우미 「위탁의료기관 찾기」 (질병관리청, 로그인 없이 지역·백신별 검색) — 사용자 결정 2026-11-09
+        buttons: [{ label: '위탁기관확인하기', caption: '예방접종도우미사이트 이동', href: 'https://nip.kdca.go.kr/irhp/mngm/goVcntMngm.do?menuLv=3&menuCd=331' }],
       },
     ],
   },
