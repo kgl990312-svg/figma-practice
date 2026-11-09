@@ -7,7 +7,8 @@
  * 문구는 Figma 완성본 그대로 (사용자 결정 — 제목 「○○보건소」, 버튼 「전화문의 번호」)
  * Figma에 TOP 버튼이 없어 넣지 않음
  *
- * 화면 이동: 위치보기 → /location?gu=구 (화면 4), 바로가기 → /services (화면 3)
+ * 화면 이동: 위치보기 → /location?gu=구 (화면 4), 바로가기 → /services?from=구 (화면 3)
+ *   from은 화면 3 데스크톱 브레드크럼 「홈 > ○○보건소 > 통합민원」에 쓰는 표시 (사용자 결정)
  *
  * 데스크톱 (841px 이상) — Figma 「데스크탑2(1440px-)」 node 3466:3704
  *   네비게이션은 DesktopNav, 큰 제목(PageTitle) 대신 「관할서비스」 제목 + 주의 박스(데스크톱만, 사용자 결정 2A)
@@ -78,7 +79,7 @@ function DistrictPage({ district }) {
           <JurisdictionService />
         </section>
 
-        <ShortcutButton label="통합민원서비스 바로가기" caption="거주구 관계없이 이용가능" href="/services" />
+        <ShortcutButton label="통합민원서비스 바로가기" caption="거주구 관계없이 이용가능" href={`/services?from=${id}`} />
       </main>
     </div>
   )

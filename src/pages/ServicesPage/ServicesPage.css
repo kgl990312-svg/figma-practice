@@ -1,7 +1,7 @@
 /*
  * ServicesPage — 화면 3 통합민원
  * 모바일 기준 (Figma 360 × 840, 좌우 여백 16px — .container)
- * 데스크톱 배치는 Figma 링크를 받은 뒤 구현한다.
+ * 데스크톱 (841px 이상) — 파일 아래쪽 미디어쿼리
  */
 
 /* 네비게이션 ↔ 대제목 8px */
@@ -23,4 +23,33 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-section);
+}
+
+/* ───────── 모바일 / 데스크톱 전환 ───────── */
+.services-page__nav-desktop {
+  display: none;
+}
+
+/* ───────── 데스크톱 (841px 이상) — Figma 「데스크탑3~6(1440px-)」 ───────── */
+@media (min-width: 52.5625em) {
+  .services-page__top,
+  .services-page__top-button {
+    display: none;
+  }
+
+  .services-page__nav-desktop {
+    display: block;
+  }
+
+  /* 브레드크럼 ↔ 섹션 64px, TOP 버튼이 없으므로 아래 여백도 64px */
+  .services-page__content {
+    margin-top: var(--space-section);
+    padding-bottom: var(--space-section);
+  }
+
+  /* 아코디언 — 좌우 16px 들여 쓰기, 항목 사이 36px (Figma) */
+  .services-page .accordion {
+    gap: var(--space-36);
+    padding-inline: var(--space-16);
+  }
 }
