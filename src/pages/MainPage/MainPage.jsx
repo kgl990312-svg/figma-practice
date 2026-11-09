@@ -23,9 +23,10 @@ import EmergencyBar from '../../components/section/EmergencyBar/EmergencyBar.jsx
 import { DISTRICTS } from '../DistrictPage/districts.js'
 import banner from '../../assets/images/banner.jpg'
 import './MainPage.css'
+import { toUrl } from '../../utils/url.js'
 
 // 구 버튼 — 누르면 그 구의 화면 2(/paldal 등)로 이동
-const REGIONS = DISTRICTS.map((district) => ({ label: district.label, href: `/${district.id}` }))
+const REGIONS = DISTRICTS.map((district) => ({ label: district.label, href: toUrl(`/${district.id}`) }))
 
 // 통합민원 카드 — open 값은 화면 3에서 펼칠 아코디언
 const SERVICES = [
@@ -146,7 +147,7 @@ function MainPage() {
           <ul className="main-page__services">
             {SERVICES.map((service) => (
               <li key={service.open}>
-                <ServiceCard label={service.label} icon={service.icon} href={`/services?open=${service.open}`} />
+                <ServiceCard label={service.label} icon={service.icon} href={toUrl(`/services?open=${service.open}`)} />
               </li>
             ))}
           </ul>

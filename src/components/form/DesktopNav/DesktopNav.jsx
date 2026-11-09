@@ -12,6 +12,7 @@ import { useId } from 'react'
 import logo from '../../../assets/icons/logo.svg'
 import searchSmall from '../../../assets/icons/search-small.svg'
 import './DesktopNav.css'
+import { toUrl } from '../../../utils/url.js'
 
 const MENUS = [
   { label: '보건소안내' },
@@ -20,7 +21,7 @@ const MENUS = [
   { label: '정보광장' },
 ]
 
-function DesktopNav({ homeHref = '/', onSearch }) {
+function DesktopNav({ homeHref = toUrl('/'), onSearch }) {
   const inputId = useId()
 
   function handleSubmit(event) {

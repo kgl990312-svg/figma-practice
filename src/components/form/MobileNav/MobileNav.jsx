@@ -21,10 +21,11 @@ import menuIcon from '../../../assets/icons/menu.svg'
 import backIcon from '../../../assets/icons/back.svg'
 import homeIcon from '../../../assets/icons/home.svg'
 import './MobileNav.css'
+import { toUrl } from '../../../utils/url.js'
 
 function MobileNav({
   variant = 'main',
-  homeHref = '/',
+  homeHref = toUrl('/'),
   onBack = () => window.history.back(),
   onSearch,
   onMenu,

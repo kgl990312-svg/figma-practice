@@ -26,6 +26,7 @@ import TopButton from '../../components/button/TopButton/TopButton.jsx'
 import { SERVICES, NO_SMOKING_INFO } from './services.js'
 import { findDistrict } from '../DistrictPage/districts.js'
 import './ServicesPage.css'
+import { toUrl } from '../../utils/url.js'
 
 const ITEMS = SERVICES.map((service) =>
   service.id === 'no-smoking' ? { ...service, extra: <InfoBox groups={NO_SMOKING_INFO} /> } : service,
@@ -40,8 +41,8 @@ function getInitialOpen() {
 function getBreadcrumb() {
   const from = findDistrict(new URLSearchParams(window.location.search).get('from'))
   return [
-    { label: '홈', href: '/' },
-    ...(from ? [{ label: from.title, href: `/${from.id}` }] : []),
+    { label: '홈', href: toUrl('/') },
+    ...(from ? [{ label: from.title, href: toUrl(`/${from.id}`) }] : []),
     { label: '통합민원' },
   ]
 }

@@ -4,6 +4,7 @@ import DistrictPage from './pages/DistrictPage/DistrictPage.jsx'
 import { findDistrict } from './pages/DistrictPage/districts.js'
 import ServicesPage from './pages/ServicesPage/ServicesPage.jsx'
 import LocationPage from './pages/LocationPage/LocationPage.jsx'
+import { currentPath } from './utils/url.js'
 
 /*
  * 화면 고르기 — 라이브러리 없이 주소(pathname)를 보고 페이지를 정한다 (사용자 결정)
@@ -15,7 +16,7 @@ import LocationPage from './pages/LocationPage/LocationPage.jsx'
  * 그 밖의 주소는 메인을 보여 준다.
  */
 function App() {
-  const path = window.location.pathname
+  const path = currentPath()
   const district = findDistrict(path.slice(1))
 
   if (district) return <DistrictPage district={district} />

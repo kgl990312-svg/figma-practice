@@ -22,6 +22,7 @@ import InfoBox from '../../components/card/InfoBox/InfoBox.jsx'
 import TransportGuide from '../../components/section/TransportGuide/TransportGuide.jsx'
 import TopButton from '../../components/button/TopButton/TopButton.jsx'
 import './LocationPage.css'
+import { toUrl } from '../../utils/url.js'
 
 // 운영시간·휴게시간 — 4개 구 같음 (Figma, 공식 사이트 「이용시간/휴무일」과 같음)
 const HOURS = [
@@ -47,7 +48,7 @@ function LocationPage({ district }) {
       </div>
       <div className="location-page__nav-desktop">
         <DesktopNav />
-        <Breadcrumb items={[{ label: '홈', href: '/' }, { label: title, href: `/${id}` }, { label: '위치·교통' }]} />
+        <Breadcrumb items={[{ label: '홈', href: toUrl('/') }, { label: title, href: toUrl(`/${id}`) }, { label: '위치·교통' }]} />
       </div>
 
       <main className="location-page__content">
@@ -63,7 +64,7 @@ function LocationPage({ district }) {
                   selected={item.id === id}
                   current={item.id === id}
                   onClick={() => {
-                    if (item.id !== id) window.location.href = `/location?gu=${item.id}`
+                    if (item.id !== id) window.location.href = toUrl(`/location?gu=${item.id}`)
                   }}
                 />
               </li>

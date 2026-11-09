@@ -32,6 +32,7 @@ import ShortcutButton from '../../components/button/ShortcutButton/ShortcutButto
 import locationBlue from '../../assets/icons/location-blue.svg'
 import locationWhite from '../../assets/icons/location-white.svg'
 import './DistrictPage.css'
+import { toUrl } from '../../utils/url.js'
 
 function DistrictPage({ district }) {
   const { id, label, title, phone, location } = district
@@ -46,7 +47,7 @@ function DistrictPage({ district }) {
       </div>
       <div className="district-page__nav-desktop">
         <DesktopNav />
-        <Breadcrumb items={[{ label: '홈', href: '/' }, { label: title }]} />
+        <Breadcrumb items={[{ label: '홈', href: toUrl('/') }, { label: title }]} />
       </div>
 
       <main className="district-page__content">
@@ -83,7 +84,7 @@ function DistrictPage({ district }) {
               label="위치보기"
               icon={locationBlue}
               hoverIcon={locationWhite}
-              href={location ? `/location?gu=${id}` : undefined}
+              href={location ? toUrl(`/location?gu=${id}`) : undefined}
             />
           </div>
         </div>
@@ -92,7 +93,7 @@ function DistrictPage({ district }) {
           <JurisdictionService />
         </section>
 
-        <ShortcutButton label="통합민원서비스 바로가기" caption="거주구 관계없이 이용가능" href={`/services?from=${id}`} />
+        <ShortcutButton label="통합민원서비스 바로가기" caption="거주구 관계없이 이용가능" href={toUrl(`/services?from=${id}`)} />
       </main>
     </div>
   )
