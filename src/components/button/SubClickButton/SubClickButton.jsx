@@ -12,9 +12,12 @@
  *
  * copyText가 있으면 데스크톱(841px 이상)에서는 desktopLabel(번호가 들어간 글자)을 보여 주고,
  * 누르면 번호를 복사해 2초 동안 「번호를 복사했어요」를 보여 준다 — PC는 전화를 걸 수 없음 (사용자 결정 2026-11-09)
- * 모바일에서는 그대로 label + href(tel:) 연결. 예: 화면 2 치과주치의 전화문의
+ * 모바일에서는 label(번호 없음)을 보여 주고, 누르면 연결 상자(CallModal)가 열려 번호를 눌러 전화 연결 (사용자 요청)
+ *   callName → 모달 제목 「○○ 전화 연결」과 줄 이름 (예: 건강보험공단, 치과주치의)
+ * 예: 화면 2 치과주치의 전화문의, 건강보험공단 문의하기
  */
-import { useId } from 'react'
+import { useId, useState } from 'react'
+import CallModal from '../../section/CallModal/CallModal.jsx'
 import { useCopyText } from '../../../hooks/useCopyText.js'
 import fileBlue from '../../../assets/icons/file-blue.svg'
 import fileWhite from '../../../assets/icons/file-white.svg'
@@ -32,8 +35,9 @@ const ICONS = {
 }
 
 // showPressed: 비교용 미리보기에서 누른 모양을 고정해 보여 줄 때만 사용 (실제 화면에서는 쓰지 않음)
-function SubClickButton({ label, icon, caption, href, newWindow = false, onClick, showPressed = false, copyText, desktopLabel }) {
+function SubClickButton({ label, icon, caption, href, newWindow = false, onClick, showPressed = false, copyText, desktopLabel, callName }) {
   const captionId = useId()
+  const [callOpen, setCallOpen] = useState(false)
   const { message, copy } = useCopyText()
   const [iconDefault, iconPressed] = icon ? ICONS[icon] : []
   // 파일 아이콘은 Figma 원본이 20px 칸 안의 14.8×17.3 그림 → 같은 크기로 놓고 Figma 위치만큼 여백
@@ -77,11 +81,31 @@ function SubClickButton({ label, icon, caption, href, newWindow = false, onClick
     </>
   )
   const mobileClass = copyText ? `${className} sub-click-button__button--mobile` : className
+  const modalName = callName ?? label
 
   return (
     <div className="sub-click-button">
       {copyButton}
-      {href ? (
+      {copyText ? (
+        // 모바일 전화 버튼 — 누르면 연결 상자(모달)
+        <>
+          <button
+            type="button"
+            className={mobileClass}
+            aria-haspopup="dialog"
+            aria-describedby={describedBy}
+            onClick={() => setCallOpen(true)}
+          >
+            {content}
+          </button>
+          <CallModal
+            open={callOpen}
+            onClose={() => setCallOpen(false)}
+            title={`${modalName} 전화 연결`}
+            items={[{ label: modalName, phone: copyText }]}
+          />
+        </>
+      ) : href ? (
         <a
           className={mobileClass}
           href={href}

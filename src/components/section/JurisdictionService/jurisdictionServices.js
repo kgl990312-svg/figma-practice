@@ -6,7 +6,7 @@
  *   id, label           메뉴 버튼
  *   items[]             지원사업 아코디언 (title)
  *     sections[]        펼친 내용: 라벨 상자(label) + 본문(body, 줄바꿈 \n) + 버튼(buttons)
- *       buttons[]       SubClickButton 속성 그대로 (label, icon, caption, href, 데스크톱 복사용 copyText·desktopLabel)
+ *       buttons[]       SubClickButton 속성 그대로 (label, icon, caption, href, 전화 버튼용 copyText·desktopLabel·callName)
  *
  * - Figma 문구를 옮기며 확실한 오타만 고침 (docs/CLAUDE.md 「Figma와 다르게 구현하는 부분」 참고)
  * - href가 비어 있는 버튼은 연결 주소를 아직 받지 못한 것 (사용자 결정: 빈 주소로 둠)
@@ -144,8 +144,14 @@ export const JURISDICTION_SERVICES = [
             label: '지원내용',
             body: '- 임신 1회당 100만원 지원(다태아는 태아당 100만원)',
             buttons: [
-              // 데스크톱: 누르면 번호 복사 (치과주치의와 같은 방식)
-              { label: '건강보험공단 1577-1000 문의하기', icon: 'phone', href: 'tel:15771000', copyText: '1577-1000' },
+              // 모바일: 번호 숨기고 누르면 연결 상자(모달) / 데스크톱: 번호 표시 + 누르면 복사 (사용자 요청)
+              {
+                label: '건강보험공단 문의하기',
+                icon: 'phone',
+                desktopLabel: '건강보험공단 1577-1000 문의하기',
+                copyText: '1577-1000',
+                callName: '건강보험공단',
+              },
             ],
           },
         ],
@@ -272,10 +278,10 @@ export const JURISDICTION_SERVICES = [
               {
                 label: '치과주치의 전화문의',
                 icon: 'phone',
-                href: 'tel:0312508895',
-                // 데스크톱: 번호를 보여 주고 누르면 복사 (사용자 결정 2026-11-09)
+                // 모바일: 누르면 연결 상자(모달) / 데스크톱: 번호를 보여 주고 누르면 복사 (사용자 결정 2026-11-09)
                 desktopLabel: '치과주치의 031-250-8895 전화문의',
                 copyText: '031-250-8895',
+                callName: '치과주치의',
               },
             ],
           },
