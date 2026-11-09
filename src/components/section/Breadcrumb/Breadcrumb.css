@@ -1,6 +1,6 @@
 /*
  * Breadcrumb — 현재 위치 안내
- * Figma에 없는 모양 → 캡션및보조설명 스타일(14/20 Medium)을 다시 씀 (사용자 결정)
+ * Figma 데스크탑2~7의 경로 글자와 같은 「본문」 스타일(14/24 Regular) (사용자 결정)
  */
 .breadcrumb__list {
   display: flex;
@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  font: var(--typo-caption); /* 14/20 Medium */
+  font: var(--typo-body); /* 본문 14/24 Regular — Figma와 같게 */
 }
 
 /* 앞 단계 링크 — 누르는 영역 높이 44px */
