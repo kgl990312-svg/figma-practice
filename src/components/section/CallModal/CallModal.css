@@ -1,0 +1,103 @@
+/*
+ * CallModal — 모바일 전화 연결 상자 (화면 가운데 모달)
+ * Figma에 없는 모양 → 사용자 참고 이미지를 따라 기존 토큰으로 구성
+ *   위: 제목 + X / 구분선 / 아래: 안내 + 구별 전화 목록
+ */
+.call-modal {
+  /* 화면 가운데, 좌우 여백 16px을 남기고 최대 360px */
+  width: calc(100% - var(--page-gutter) * 2);
+  max-width: 22.5rem; /* 360px — 모바일 기준 폭. 토큰 없음 */
+  max-height: 85vh;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--card-radius-12);
+  background: var(--color-white-900);
+}
+
+/* 뒤 화면을 어둡게 — 검정 40% (토큰 없음, 사용자 결정 2026-11-09) */
+.call-modal::backdrop {
+  background: color-mix(in srgb, var(--color-black-900) 40%, transparent);
+}
+
+/* 위쪽: 제목 + X, 아래 구분선 (grey/100은 장식용 구분선에만 씀) */
+.call-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-8) var(--space-12) var(--space-20);
+  border-bottom: 1px solid var(--color-grey-100); /* 1px 선 — 토큰 없음 */
+}
+
+/* 섹션타이틀 20/28 SemiBold */
+.call-modal__title {
+  color: var(--color-grey-900);
+  font: var(--typo-section-title);
+  word-break: keep-all;
+}
+
+/* X — 아이콘 20px, 누르는 영역 44px */
+.call-modal__close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
+}
+
+.call-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding: var(--space-20);
+}
+
+/* 본문 14/24 */
+.call-modal__description {
+  color: var(--color-grey-700);
+  font: var(--typo-body);
+  word-break: keep-all;
+}
+
+/* 구별 전화 목록 — 간격 8px */
+.call-modal__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* 한 줄: 「팔달구 … 031-5191-6030 📞」 — 의료센터 카드와 같은 테두리·라운드 */
+.call-modal__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  min-height: 3.25rem; /* 52px — 한 손으로 누르기 쉬운 높이. 토큰 없음 */
+  padding: var(--space-12) var(--space-16);
+  border: 1px solid var(--color-grey-400); /* 1px 테두리 — 토큰 없음 */
+  border-radius: var(--card-radius-12);
+  background: var(--color-white-900);
+  color: var(--color-grey-900);
+  text-decoration: none;
+}
+
+/* 카드및버튼타이틀 16/26 SemiBold */
+.call-modal__item-label {
+  font: var(--typo-card-title);
+}
+
+.call-modal__item-phone {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--color-blue-700);
+  font: var(--typo-card-title);
+}
+
+/* 누르는 동안 — 참고 이미지처럼 고른 줄이 파랗게 (굵은 테두리도 함께) */
+.call-modal__item:active {
+  border-color: var(--color-blue-700);
+  box-shadow: inset 0 0 0 1px var(--color-blue-700); /* 1px + 1px = 2px 테두리, 크기는 그대로. 토큰 없음 */
+  background: var(--color-blue-100);
+}

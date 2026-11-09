@@ -94,7 +94,7 @@ button.medical-center-card:active .medical-center-card__icon--pressed,
 
 /* ───────── 구마다 번호가 다른 센터 (치매안심센터, 사용자 결정 1A) ───────── */
 
-/* 모바일: 카드를 누르면 CallSheet(연결 상자)가 열림 — 모양은 CallSheet.css */
+/* 모바일: 카드를 누르면 CallModal(연결 상자)가 열림 — 모양은 CallModal.css */
 
 /* 데스크톱: 카드 안에 「구 이름 + 번호」 4개를 2칸으로 */
 .medical-center-card--regions {

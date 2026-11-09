@@ -14,7 +14,7 @@
  *   두 모양을 모두 그려 두고 CSS로 하나만 보이게 한다 (숨긴 쪽은 화면 낭독기·키보드에서도 빠짐)
  *
  * 구마다 번호가 다른 센터 (regions — 치매안심센터, 사용자 결정 1A)
- *   모바일: 카드를 누르면 아래에서 연결 상자(CallSheet, 모달)가 올라오고, 구를 고르면 그 구 센터로 전화 연결 (사용자 요청)
+ *   모바일: 카드를 누르면 아래에서 연결 상자(CallModal, 모달)가 올라오고, 구를 고르면 그 구 센터로 전화 연결 (사용자 요청)
  *   데스크톱: 펼치지 않고 카드 안에 「구 이름 + 번호」 4개를 바로 보여 줌 — 번호마다 누르면 복사
  *   Figma에 없는 모양 → 연결 상자의 버튼은 메인버튼(화이트)을 다시 씀
  *
@@ -23,7 +23,7 @@
 import { useEffect, useState } from 'react'
 import phoneGrey from '../../../assets/icons/phone-grey.svg'
 import phoneBlue from '../../../assets/icons/phone-blue.svg'
-import CallSheet from '../../section/CallSheet/CallSheet.jsx'
+import CallModal from '../../section/CallModal/CallModal.jsx'
 import './MedicalCenterCard.css'
 
 const toTel = (phone) => `tel:${phone.replaceAll('-', '')}`
@@ -90,7 +90,7 @@ function MedicalCenterCard({ name, phone, regions, showPressed = false }) {
               <CallIcons />
             </span>
           </button>
-          <CallSheet
+          <CallModal
             open={open}
             onClose={() => setOpen(false)}
             title={`${name} 전화 연결`}
