@@ -112,6 +112,6 @@
 
   /* ───────── 3. 그림자 ───────── */
   --shadow-floating: 0 1px 4px rgba(0, 0, 0, 0.16); /* 떠 있는 버튼 — 탑버튼 */
-  --shadow-bottom-bar: 0 -2px 4px rgba(0, 0, 0, 0.16); /* 하단 고정 영역 — 긴급원클릭서비스 (Figma 하단고정긴급 drop shadow 값) */
+  --shadow-bottom-bar: 0 -2px 8px rgba(0, 0, 0, 0.16); /* 하단 고정 영역 — 긴급원클릭서비스 (Figma 하단고정긴급 drop shadow: y -2, 흐림 8, 16%) */
   --shadow-pressed: 0 2px 8px rgba(0, 0, 0, 0.16), inset 0 2px 8px rgba(0, 0, 0, 0.16); /* 누른 상태 — 탑버튼 누름탑 */
 }

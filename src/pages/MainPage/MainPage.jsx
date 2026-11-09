@@ -10,6 +10,7 @@
  */
 import { useState } from 'react'
 import MobileNav from '../../components/form/MobileNav/MobileNav.jsx'
+import DesktopNav from '../../components/form/DesktopNav/DesktopNav.jsx'
 import SectionTitle from '../../components/section/SectionTitle/SectionTitle.jsx'
 import CautionBox from '../../components/card/CautionBox/CautionBox.jsx'
 import RegionButton from '../../components/button/RegionButton/RegionButton.jsx'
@@ -83,7 +84,13 @@ function MainPage() {
 
   return (
     <div className="main-page container">
-      <MobileNav />
+      {/* 네비게이션 — 모바일은 MobileNav, 데스크톱(841px 이상)은 DesktopNav (CSS로 하나만 보임) */}
+      <div className="main-page__nav-mobile">
+        <MobileNav />
+      </div>
+      <div className="main-page__nav-desktop">
+        <DesktopNav />
+      </div>
 
       <main className="main-page__content">
         <h1 className="sr-only">수원시보건소</h1>

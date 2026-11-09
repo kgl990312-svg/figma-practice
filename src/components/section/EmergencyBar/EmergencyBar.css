@@ -23,6 +23,17 @@
   min-height: 10.25rem; /* 164px — Figma 높이. 토큰 없음 */
 }
 
+/* 접힘 — Figma 「Property 1=접기」: 배경 red/300, 높이 64px, 제목 줄은 가운데
+ * (누르는 영역 44px을 가운데 두면 글자 위치가 Figma와 같음) */
+.emergency-bar--collapsed {
+  min-height: 4rem; /* 64px — Figma 높이. 토큰 없음 */
+  background: var(--color-red-300);
+}
+
+.emergency-bar--collapsed .emergency-bar__toggle {
+  margin-top: 0;
+}
+
 /* 제목 줄 — 줄 전체가 접기/펼치기 버튼 */
 .emergency-bar__toggle {
   display: flex;
@@ -70,6 +81,25 @@
   text-decoration: none;
 }
 
+/* 누르는 동안(모바일) — Figma 「Property 1=클릭」: 빨간 배경(red/700), 흰 글자·흰 아이콘
+ * 데스크톱은 아래 미디어쿼리에서 마우스를 올렸을 때도 같게 바뀜 */
+.emergency-bar__icon--pressed {
+  display: none;
+}
+
+.emergency-bar__button:active {
+  background: var(--color-red-700);
+  color: var(--color-white-900);
+}
+
+.emergency-bar__button:active .emergency-bar__icon--default {
+  display: none;
+}
+
+.emergency-bar__button:active .emergency-bar__icon--pressed {
+  display: block;
+}
+
 .emergency-bar__icon--heart {
   margin-bottom: 0.094rem; /* 1.5px — Figma 그룹 위치 */
 }
@@ -81,4 +111,75 @@
 
 .emergency-bar__line {
   word-break: keep-all;
+}
+
+/* 데스크톱 제목 — 모바일에서는 접기 버튼이 제목 역할을 하므로 숨김 */
+.emergency-bar__heading {
+  display: none;
+}
+
+/* ───────── 데스크톱 (841px 이상) — Figma 「데스크탑1(1440-)」 하단고정긴급 1200 × 164 ─────────
+ * 고정하지 않고 페이지 맨 끝(콘텐츠 폭 안)에 놓음, 접기/펼치기 없음 (사용자 결정)
+ * 제목 ↔ 버튼 간격은 Figma 그대로 26px */
+@media (min-width: 52.5625em) {
+  .emergency-bar {
+    position: static;
+    gap: 1.625rem; /* 26px — Figma 간격. 토큰 없음 */
+    min-height: 10.25rem; /* 164px — Figma 높이. 토큰 없음 */
+    margin-top: var(--space-section); /* 공지사항 ↔ 긴급원클릭서비스 64px */
+  }
+
+  .emergency-bar__toggle {
+    display: none;
+  }
+
+  /* 데스크톱은 접기가 없으므로 모바일에서 접어 둔 채 넓혀도 기본 모습 */
+  .emergency-bar--collapsed {
+    background: var(--color-white-900);
+  }
+
+  .emergency-bar__heading {
+    display: block;
+    padding-inline: var(--space-8);
+    color: var(--color-black-900);
+    font: var(--typo-card-title); /* 카드및버튼타이틀 16/26 SemiBold */
+  }
+
+  /* 데스크톱은 누를 때가 아니라 마우스를 올렸을 때 빨간 배경·흰 글자 (사용자 결정)
+   * 키보드로 이동했을 때(포커스)도 같게 */
+  .emergency-bar__button:hover,
+  .emergency-bar__button:focus-visible {
+    background: var(--color-red-700);
+    color: var(--color-white-900);
+  }
+
+  .emergency-bar__button:hover .emergency-bar__icon--default,
+  .emergency-bar__button:focus-visible .emergency-bar__icon--default {
+    display: none;
+  }
+
+  .emergency-bar__button:hover .emergency-bar__icon--pressed,
+  .emergency-bar__button:focus-visible .emergency-bar__icon--pressed {
+    display: block;
+  }
+
+  /* 데스크톱은 아이콘 + 글자를 가로 한 줄로 (사용자 결정, Figma는 세로 배치)
+   * 예: [아이콘] 휴일지킴이 (야간·휴일 약국)
+   * 모바일(841px 미만)로 줄어들면 원래 세로 배치로 돌아감.
+   * 글자를 크게 키워 칸이 모자라면 두 줄로 넘어가 잘리지 않게 함 */
+  .emergency-bar__button {
+    flex-direction: row;
+  }
+
+  .emergency-bar__label {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: var(--space-4);
+  }
+
+  /* 모바일에서 접어 둔 채 화면을 넓혀도 데스크톱에서는 항상 보임 */
+  .emergency-bar__list[hidden] {
+    display: grid;
+  }
 }

@@ -1,8 +1,23 @@
 /*
  * MainPage — 화면 1 메인
  * 모바일 기준 (Figma 360 × 840, 좌우 여백 16px — .container)
- * 데스크톱 배치는 Figma 링크를 받은 뒤 구현한다.
+ * 데스크톱 (841px 이상) — Figma 「데스크탑1(1440-)」 node 3466:3721
  */
+
+/* 네비게이션: 모바일은 MobileNav, 데스크톱은 DesktopNav만 보임 */
+.main-page__nav-desktop {
+  display: none;
+}
+
+@media (min-width: 52.5625em) {
+  .main-page__nav-mobile {
+    display: none;
+  }
+
+  .main-page__nav-desktop {
+    display: block;
+  }
+}
 
 /* 본문 섹션 사이 36px. 아래 164px은 하단고정긴급이 가리지 않도록 둔 여백 (Figma 공지사항영역 아래 여백) */
 .main-page__content {
@@ -81,4 +96,30 @@
 .main-page__tabs {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ───────── 데스크톱 (841px 이상) — Figma 「데스크탑1(1440-)」 ─────────
+ * 배너는 폭 전체, 그 아래 섹션은 2칸씩 나란히 (칸 사이 64px, 줄 사이 64px)
+ *   1줄: 보건 주요 서비스 | 통합민원서비스
+ *   2줄: 수원시 의료센터   | 공지사항
+ * Figma의 폭 전체 「보건 주요 서비스」 큰 제목은 왼쪽 칸 제목과 겹쳐 한 번만 보여 줌 (사용자 결정 2A)
+ * 긴급원클릭서비스는 고정하지 않고 페이지 맨 끝에 놓음 (사용자 결정 3A) → 아래 여백 164px 필요 없음
+ */
+@media (min-width: 52.5625em) {
+  .main-page__content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--space-section) var(--space-64);
+    padding-bottom: 0;
+  }
+
+  /* 긴급원클릭서비스 아래 여백 64px (사용자 결정) */
+  .main-page {
+    padding-bottom: var(--space-section);
+  }
+
+  .main-page__banner {
+    grid-column: 1 / -1;
+  }
 }
