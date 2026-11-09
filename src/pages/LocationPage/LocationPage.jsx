@@ -6,7 +6,7 @@
  * 구별 내용은 districts.js. 지도·지하철·주차 정보가 없는 구는 그 칸을 숨김 (사용자 결정)
  *
  * 데스크톱 (841px 이상) — Figma 「데스크탑7(1440px-)」 node 3466:3638
- *   DesktopNav → 브레드크럼 「홈 > ○○보건소 > 위치·교통」 → 제목 「위치·교통」(모바일과 같은 문구, 사용자 결정) → 구 바꾸기 버튼 4개
+ *   DesktopNav → 브레드크럼 「홈 > ○○보건소 > 위치·교통」 → 제목 「보건소 위치·교통안내」(모바일 큰 제목은 「위치·교통」 — 데스크톱만 설명형 제목, 사용자 결정) → 구 바꾸기 버튼 4개
  *   → 2칸: 왼쪽(위치 안내 + 지도) | 오른쪽(운영시간 박스 + 교통 주차 시설). TOP 버튼 없음
  *   Figma 설명 자리의 「내지역버튼>」은 들어온 경로 메모라 빼고 브레드크럼으로 (사용자 결정)
  */
@@ -53,7 +53,7 @@ function LocationPage({ district }) {
       <main className="location-page__content">
         {/* 데스크톱만 — 제목 + 구 바꾸기 버튼 (누르면 그 구의 위치·교통으로 이동) */}
         <div className="location-page__desktop-head">
-          <h1 className="location-page__desktop-title">위치·교통</h1>
+          <h1 className="location-page__desktop-title">보건소 위치·교통안내</h1>
           <ul className="location-page__regions" aria-label="보건소 선택">
             {DISTRICTS.map((item) => (
               <li key={item.id}>
