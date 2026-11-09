@@ -41,7 +41,13 @@ function LocationPage({ district }) {
 
         {location.map && (
           <div className="location-page__map">
-            <img src={location.map} alt={`${label}구보건소 위치 지도`} width="989" height="673" />
+            <iframe
+              src={location.map}
+              title={`${label}구보건소 위치 지도 (구글 지도)`}
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
           </div>
         )}
 

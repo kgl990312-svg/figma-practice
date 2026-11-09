@@ -24,22 +24,18 @@
   padding-bottom: 7.3125rem; /* 117px = 51 + 50 + 16. 토큰 없음 */
 }
 
-/* 지도 — 화면 폭 전체(좌우 여백 없음), 높이 327px
- * Figma는 지도 이미지를 크게 놓고 보건소 주변만 보이게 잘라 씀 → 같은 크기·위치로 자름 */
+/* 지도 — 화면 폭 전체(좌우 여백 없음), 높이 327px (Figma 높이)
+ * Figma 이미지 대신 구글 지도 퍼가기 (사용자 결정, 2026-11-09) */
 .location-page__map {
-  position: relative;
   height: 20.4375rem; /* 327px — Figma 높이. 토큰 없음 */
   margin-inline: calc(var(--page-gutter) * -1);
-  overflow: hidden;
 }
 
-.location-page__map img {
-  position: absolute;
-  top: -9.975rem; /* -159.6px — Figma 이미지 위치 */
-  left: calc(50% - 25.411rem); /* 화면 가운데에서 -406.6px */
-  width: 51.81rem; /* 829px — Figma 이미지 크기 (628px 영역의 132%) */
-  max-width: none;
-  height: auto;
+.location-page__map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 /* 섹션타이틀 ↔ 교통 목록 36px */
