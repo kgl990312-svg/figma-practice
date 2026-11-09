@@ -19,6 +19,7 @@
 import { useEffect, useId, useRef } from 'react'
 import closeIcon from '../../../assets/icons/close.svg'
 import phoneBlue from '../../../assets/icons/phone-blue.svg'
+import phoneWhite from '../../../assets/icons/phone-white.svg'
 import './CallModal.css'
 
 function CallModal({ open, onClose, title, description, items }) {
@@ -74,7 +75,8 @@ function CallModal({ open, onClose, title, description, items }) {
                 <span className="call-modal__item-phone">
                   {item.phone}
                   {/* 아이콘은 장식 */}
-                  <img src={phoneBlue} alt="" width="20" height="20" />
+                  <img className="call-modal__icon--default" src={phoneBlue} alt="" width="20" height="20" />
+                  <img className="call-modal__icon--pressed" src={phoneWhite} alt="" width="20" height="20" />
                 </span>
               </a>
             </li>
