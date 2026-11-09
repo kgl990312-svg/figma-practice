@@ -66,7 +66,8 @@ function DistrictPage({ district }) {
             {phone && (
               <>
                 <div className="district-page__mobile-only">
-                  <MainButton variant="white" label={`전화문의 ${phone}`} hasPopup onClick={() => setCallOpen(true)} />
+                  {/* 모바일은 번호를 숨기고 「전화문의」만 — 누르면 모달에서 번호를 보고 연결 (사용자 요청) */}
+                  <MainButton variant="white" label="전화문의" hasPopup onClick={() => setCallOpen(true)} />
                   <CallModal
                     open={callOpen}
                     onClose={() => setCallOpen(false)}

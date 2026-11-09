@@ -8,7 +8,7 @@
  * Figma에 hover / disabled 상태는 없음 → 만들지 않음
  *
  * 모바일 / 데스크톱 (사용자 결정, 2026-11-09)
- *   모바일(841px 미만): 「전화문의」 — 누르면 전화 연결(tel:, 이동 안내 팝업 없음 — PRD 6-1)
+ *   모바일(841px 미만): 「전화문의」 — 누르면 연결 상자(CallModal)에서 번호를 보고 눌러 전화 연결 (사용자 요청)
  *   데스크톱(841px 이상): 「전화문의」 대신 전화번호를 진하게 보여 줌 (PC는 전화를 걸 수 없음)
  *     누르면 번호를 복사하고 2초 동안 「번호를 복사했어요」 표시, 마우스를 올리면 누른 모양
  *   두 모양을 모두 그려 두고 CSS로 하나만 보이게 한다 (숨긴 쪽은 화면 낭독기·키보드에서도 빠짐)
@@ -26,8 +26,6 @@ import phoneGrey from '../../../assets/icons/phone-grey.svg'
 import phoneBlue from '../../../assets/icons/phone-blue.svg'
 import CallModal from '../../section/CallModal/CallModal.jsx'
 import './MedicalCenterCard.css'
-
-const toTel = (phone) => `tel:${phone.replaceAll('-', '')}`
 
 function CallIcons() {
   // 아이콘은 장식이라 alt를 비움
@@ -119,15 +117,21 @@ function MedicalCenterCard({ name, phone, regions, showPressed = false }) {
 
   return (
     <div className="medical-center-card-group">
-      {/* 모바일 — 누르면 전화 연결 */}
+      {/* 모바일 — 누르면 연결 상자(모달)가 열리고, 번호를 누르면 전화 연결 (치매안심센터와 같은 방식, 사용자 요청) */}
       <div className="medical-center-card__mobile">
-        <a className={className} href={toTel(phone)} aria-label={`${name} 전화문의 ${phone}`}>
+        <button type="button" className={className} aria-haspopup="dialog" onClick={() => setOpen(true)}>
           {nameEl}
           <span className="medical-center-card__call">
             전화문의
             <CallIcons />
           </span>
-        </a>
+        </button>
+        <CallModal
+          open={open}
+          onClose={() => setOpen(false)}
+          title={`${name} 전화 연결`}
+          items={[{ label: name, phone }]}
+        />
       </div>
 
       {/* 데스크톱 — 번호를 진하게 보여 주고, 누르면 번호 복사 */}
