@@ -34,3 +34,16 @@
   background: var(--color-white-900);
   color: var(--color-blue-700);
 }
+
+/* 데스크톱 (841px 이상) — 화이트버튼에 마우스를 올리면(키보드 포커스 포함) 연파랑 배경
+ * Figma에 호버 상태 없음 → 의료센터 카드 호버와 같은 blue/100 (사용자 결정 2026-11-09) */
+@media (min-width: 52.5625em) {
+  .main-button--white {
+    cursor: pointer;
+  }
+
+  .main-button--white:hover,
+  .main-button--white:focus-visible {
+    background: var(--color-blue-100);
+  }
+}

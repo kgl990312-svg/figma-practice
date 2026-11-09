@@ -1,0 +1,41 @@
+/*
+ * Breadcrumb — 현재 위치 안내
+ * Figma에 없는 모양 → 캡션및보조설명 스타일(14/20 Medium)을 다시 씀 (사용자 결정)
+ */
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font: var(--typo-caption); /* 14/20 Medium */
+}
+
+/* 앞 단계 링크 — 누르는 영역 높이 44px */
+.breadcrumb__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target-min);
+  color: var(--color-grey-700);
+  text-decoration: none;
+}
+
+.breadcrumb__link:hover,
+.breadcrumb__link:focus-visible {
+  color: var(--color-blue-700);
+  text-decoration: underline;
+}
+
+.breadcrumb__separator {
+  color: var(--color-grey-700);
+}
+
+/* 현재 화면 — 진하게 */
+.breadcrumb__current {
+  color: var(--color-grey-900);
+}

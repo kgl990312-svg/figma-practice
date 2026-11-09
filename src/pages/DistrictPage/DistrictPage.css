@@ -1,7 +1,7 @@
 /*
  * DistrictPage — 화면 2 구 보건소
  * 모바일 기준 (Figma 360 × 840, 좌우 여백 16px — .container)
- * 데스크톱 배치는 Figma 링크를 받은 뒤 구현한다.
+ * 데스크톱 (841px 이상) — 파일 아래쪽 미디어쿼리
  */
 
 /* 네비게이션 ↔ 대제목 8px */
@@ -25,4 +25,62 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-16);
+}
+
+/* ───────── 모바일 / 데스크톱 전환 ───────── */
+.district-page__nav-desktop,
+.district-page__intro,
+.district-page__box-title,
+.district-page__desktop-only {
+  display: none;
+}
+
+/* ───────── 데스크톱 (841px 이상) — Figma 「데스크탑2(1440px-)」 node 3466:3704 ───────── */
+@media (min-width: 52.5625em) {
+  .district-page__top,
+  .district-page__mobile-only {
+    display: none;
+  }
+
+  .district-page__nav-desktop,
+  .district-page__desktop-only {
+    display: block;
+  }
+
+  /* 섹션 사이 64px (--space-section), 아래 여백도 64px */
+  .district-page__content {
+    padding-bottom: var(--space-section);
+  }
+
+  /* 「관할서비스」 제목 ↔ 주의 박스 16px */
+  .district-page__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  /* 설명박스 — blue/50 배경, 2px blue/700 테두리, 라운드 12, 안쪽 20px, 제목 ↔ 버튼 36px */
+  .district-page__box {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-36);
+    padding: var(--space-20);
+    border: 2px solid var(--color-blue-700); /* 2px 테두리 — 토큰 없음 */
+    border-radius: var(--card-radius-12);
+    background: var(--color-blue-50);
+  }
+
+  /* 섹션타이틀 20/28 SemiBold, 검정 */
+  .district-page__box-title {
+    display: block;
+    color: var(--color-black-900);
+    font: var(--typo-section-title);
+  }
+
+  /* 전화문의 | 위치보기 나란히, 간격 64px */
+  .district-page__buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-64);
+  }
 }
