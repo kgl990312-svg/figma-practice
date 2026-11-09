@@ -1,0 +1,77 @@
+/*
+ * CallSheet — 모바일 전화 연결 상자 (바텀시트)
+ * Figma에 없는 모양 → 기존 토큰·컴포넌트(MainButton 화이트)로 구성
+ */
+.call-sheet {
+  /* 화면 맨 아래에 붙고 폭 전체 */
+  width: 100%;
+  max-width: none;
+  max-height: 80vh;
+  margin: auto 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--card-radius-12) var(--card-radius-12) 0 0;
+  background: var(--color-white-900);
+  box-shadow: var(--shadow-bottom-bar);
+}
+
+/* 뒤 화면을 어둡게 — 검정 40% (토큰 없음, 사용자 결정 2026-11-09) */
+.call-sheet::backdrop {
+  background: color-mix(in srgb, var(--color-black-900) 40%, transparent);
+}
+
+.call-sheet__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding: var(--space-20) var(--page-gutter) calc(var(--space-20) + env(safe-area-inset-bottom));
+}
+
+.call-sheet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+/* 섹션타이틀 20/28 SemiBold */
+.call-sheet__title {
+  color: var(--color-grey-900);
+  font: var(--typo-section-title);
+  word-break: keep-all;
+}
+
+/* [닫기] — 누르는 영역 44px */
+.call-sheet__close {
+  flex: none;
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  padding-inline: var(--space-8);
+  color: var(--color-grey-700);
+  font: var(--typo-card-title);
+}
+
+/* 본문 14/24 */
+.call-sheet__description {
+  color: var(--color-grey-700);
+  font: var(--typo-body);
+  word-break: keep-all;
+}
+
+/* 구별 전화 버튼 — 간격 8px */
+.call-sheet__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* 열릴 때 아래에서 올라옴 — 움직임 줄이기 설정이면 base.css가 애니메이션을 끔 */
+.call-sheet[open] {
+  animation: call-sheet-up 0.2s ease-out;
+}
+
+@keyframes call-sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}

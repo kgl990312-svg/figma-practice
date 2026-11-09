@@ -14,17 +14,16 @@
  *   두 모양을 모두 그려 두고 CSS로 하나만 보이게 한다 (숨긴 쪽은 화면 낭독기·키보드에서도 빠짐)
  *
  * 구마다 번호가 다른 센터 (regions — 치매안심센터, 사용자 결정 1A)
- *   모바일: 카드를 누르면 아래에 구 버튼 4개가 펼쳐지고, 구 버튼을 누르면 그 구 센터로 전화 연결
+ *   모바일: 카드를 누르면 아래에서 연결 상자(CallSheet, 모달)가 올라오고, 구를 고르면 그 구 센터로 전화 연결 (사용자 요청)
  *   데스크톱: 펼치지 않고 카드 안에 「구 이름 + 번호」 4개를 바로 보여 줌 — 번호마다 누르면 복사
- *   Figma에 없는 모양 → 구 버튼은 공지 지역 버튼(「공지버튼완본」)과 같은 모양으로 맞춤
+ *   Figma에 없는 모양 → 연결 상자의 버튼은 메인버튼(화이트)을 다시 씀
  *
  * Figma와 다른 점: 「전화문의」 글자가 Figma에서는 Inter 폰트 → Pretendard GOV로 맞춤 (결정 J)
  */
-import { useEffect, useId, useState } from 'react'
+import { useEffect, useState } from 'react'
 import phoneGrey from '../../../assets/icons/phone-grey.svg'
 import phoneBlue from '../../../assets/icons/phone-blue.svg'
-import chevronDown from '../../../assets/icons/chevron-down.svg'
-import chevronUp from '../../../assets/icons/chevron-up.svg'
+import CallSheet from '../../section/CallSheet/CallSheet.jsx'
 import './MedicalCenterCard.css'
 
 const toTel = (phone) => `tel:${phone.replaceAll('-', '')}`
@@ -67,7 +66,6 @@ function CallIcons() {
 function MedicalCenterCard({ name, phone, regions, showPressed = false }) {
   const [open, setOpen] = useState(false)
   const [copied, copy] = useCopyPhone()
-  const regionListId = useId()
   const copiedText = (target) =>
     copied?.phone === target ? (copied.ok ? COPIED_TEXT : COPY_FAILED_TEXT) : null
   // 복사 결과를 화면 낭독기에 알려 주는 칸 (눈에는 안 보임)
@@ -83,34 +81,22 @@ function MedicalCenterCard({ name, phone, regions, showPressed = false }) {
   if (regions) {
     return (
       <div className="medical-center-card-group">
-        {/* 모바일 — 누르면 구 버튼 펼치기 */}
+        {/* 모바일 — 누르면 연결 상자(모달)가 열림 */}
         <div className="medical-center-card__mobile">
-          <button
-            type="button"
-            className={className}
-            aria-expanded={open}
-            aria-controls={regionListId}
-            onClick={() => setOpen(!open)}
-          >
+          <button type="button" className={className} aria-haspopup="dialog" onClick={() => setOpen(true)}>
             {nameEl}
             <span className="medical-center-card__call">
               전화문의
-              <img className="medical-center-card__icon" src={open ? chevronUp : chevronDown} alt="" width="20" height="20" />
+              <CallIcons />
             </span>
           </button>
-          <ul id={regionListId} className="medical-center-card__regions" hidden={!open}>
-            {regions.map((region) => (
-              <li key={region.label}>
-                <a
-                  className="medical-center-card__region"
-                  href={toTel(region.phone)}
-                  aria-label={`${region.label}구 ${name} 전화문의 ${region.phone}`}
-                >
-                  {region.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <CallSheet
+            open={open}
+            onClose={() => setOpen(false)}
+            title={`${name} 전화 연결`}
+            description="주민등록상 주소지 구의 센터를 골라 주세요."
+            items={regions.map((region) => ({ label: `${region.label}구`, phone: region.phone }))}
+          />
         </div>
 
         {/* 데스크톱 — 구별 번호를 바로 보여 줌, 번호를 누르면 복사 */}
@@ -128,6 +114,8 @@ function MedicalCenterCard({ name, phone, regions, showPressed = false }) {
                   >
                     <span className="medical-center-card__number-label">{region.label}</span>
                     {copiedText(region.phone) ?? region.phone}
+                    {/* 다른 의료센터 카드처럼 번호 옆 전화 아이콘 (사용자 요청) */}
+                    <CallIcons />
                   </button>
                 </li>
               ))}
