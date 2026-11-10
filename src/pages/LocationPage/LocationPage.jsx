@@ -63,8 +63,10 @@ function LocationPage({ district }) {
                   size="small"
                   selected={item.id === id}
                   current={item.id === id}
-                  onClick={() => {
-                    if (item.id !== id) window.location.href = toUrl(`/location?gu=${item.id}`)
+                  href={toUrl(`/location?gu=${item.id}`)}
+                  onClick={(event) => {
+                    // 지금 보고 있는 구는 다시 불러오지 않음
+                    if (item.id === id) event.preventDefault()
                   }}
                 />
               </li>

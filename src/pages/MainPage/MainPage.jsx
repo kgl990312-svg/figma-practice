@@ -87,9 +87,11 @@ function NoticeTabs() {
 function MainPage() {
   const [region, setRegion] = useState(null) // Figma처럼 처음에는 선택 없음
 
-  function selectRegion({ label, href }) {
+  // 구 버튼은 링크라 누르면 브라우저가 이동 — 이동하는 동안 누른 구를 선택 모습으로 보여 줌
+  // Ctrl·Shift·휠 클릭으로 새 탭에 열 때는 이 화면에 남으므로 선택 모습을 바꾸지 않음
+  function selectRegion(event, label) {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return
     setRegion(label)
-    if (href) window.location.href = href
   }
 
   return (
@@ -129,7 +131,8 @@ function MainPage() {
                     label={item.label}
                     selected={region === item.label}
                     describedBy="main-medical-support"
-                    onClick={() => selectRegion(item)}
+                    href={item.href}
+                    onClick={(event) => selectRegion(event, item.label)}
                   />
                 </li>
               ))}

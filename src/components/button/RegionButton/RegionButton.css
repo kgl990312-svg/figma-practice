@@ -17,6 +17,7 @@
   color: var(--color-grey-400);
   font: var(--typo-button); /* 미클릭 button 18/20 Medium */
   text-align: center;
+  text-decoration: none; /* 링크로 쓸 때 밑줄 없음 (base.css의 목록 안 링크 밑줄 규칙보다 우선) */
   word-break: keep-all;
 }
 

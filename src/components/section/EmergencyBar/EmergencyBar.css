@@ -1,7 +1,7 @@
 /*
  * EmergencyBar — Figma 「하단고정긴급」
  * 화면 맨 아래에 고정, 화면 폭을 꽉 채운다 (Figma 360 × 164).
- * 이 바가 본문을 가리지 않도록 페이지 쪽에서 아래 여백 164px을 둔다.
+ * 이 바가 본문을 가리지 않도록 페이지 쪽에서 바의 실제 높이(--emergency-bar-height, 기본 164px)만큼 아래 여백을 둔다.
  */
 .emergency-bar {
   position: fixed;

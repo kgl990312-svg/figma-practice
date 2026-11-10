@@ -19,7 +19,7 @@
  *     (Figma 데스크톱에는 화살표가 있지만 가리는 내용이 없어 아코디언을 뺌 — 사용자 결정 3A·5A)
  *     → 데스크톱에서는 접기 버튼 대신 제목 글자(emergency-bar__heading)만 보임 (CSS로 전환)
  */
-import { useId, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import pharmacyRed from '../../../assets/icons/pharmacy-red.svg'
 import heartRed from '../../../assets/icons/heart-red.svg'
 import moonRed from '../../../assets/icons/moon-red.svg'
@@ -42,9 +42,26 @@ const EMERGENCY_SERVICES = [
 function EmergencyBar({ services = EMERGENCY_SERVICES, defaultOpen = true }) {
   const [open, setOpen] = useState(defaultOpen)
   const listId = useId()
+  const barRef = useRef(null)
+
+  // 바의 실제 높이를 --emergency-bar-height로 알려 줌 → 페이지가 그만큼 아래 여백을 둬 내용이 가려지지 않음
+  // 접기/펼치기, 글자 크기 키우기, 화면 회전으로 높이가 바뀌어도 따라감
+  useEffect(() => {
+    const bar = barRef.current
+    if (!bar || typeof ResizeObserver === 'undefined') return undefined
+    const root = document.documentElement
+    const observer = new ResizeObserver(() => {
+      root.style.setProperty('--emergency-bar-height', `${bar.offsetHeight}px`)
+    })
+    observer.observe(bar)
+    return () => {
+      observer.disconnect()
+      root.style.removeProperty('--emergency-bar-height')
+    }
+  }, [])
 
   return (
-    <aside className={`emergency-bar${open ? '' : ' emergency-bar--collapsed'}`} aria-label="긴급원클릭서비스">
+    <aside ref={barRef} className={`emergency-bar${open ? '' : ' emergency-bar--collapsed'}`} aria-label="긴급원클릭서비스">
       {/* 데스크톱 제목 — 접기 버튼 없이 글자만 */}
       <p className="emergency-bar__heading">긴급원클릭서비스</p>
       <button

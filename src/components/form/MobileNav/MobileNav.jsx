@@ -23,10 +23,23 @@ import homeIcon from '../../../assets/icons/home.svg'
 import './MobileNav.css'
 import { toUrl } from '../../../utils/url.js'
 
+// 이전 화면으로 — 바로 앞 화면이 이 사이트일 때만 뒤로가기
+// 공유 링크로 바로 들어온 경우(앞 화면이 카카오톡 등 다른 곳이거나 없음)에는 메인으로 이동
+function goBack() {
+  let cameFromThisSite = false
+  try {
+    cameFromThisSite = new URL(document.referrer).origin === window.location.origin
+  } catch {
+    // referrer가 비어 있으면 주소가 아니라서 여기로 옴 → 메인으로
+  }
+  if (cameFromThisSite && window.history.length > 1) window.history.back()
+  else window.location.href = toUrl('/')
+}
+
 function MobileNav({
   variant = 'main',
   homeHref = toUrl('/'),
-  onBack = () => window.history.back(),
+  onBack = goBack,
   onSearch,
   onMenu,
   defaultSearchOpen = false, // 비교용 미리보기에서 검색창이 열린 모양을 보여 줄 때 사용
