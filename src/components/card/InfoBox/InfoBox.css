@@ -72,6 +72,51 @@
   flex: none;
 }
 
+/* 흰 전화 아이콘 — 데스크톱 호버 때만 보임 */
+.info-box__icon--hover {
+  display: none;
+}
+
+/* 전화번호 버튼 — 모바일은 연결 상자 버튼, 데스크톱은 번호 복사 버튼만 보임 (전화번호 원칙) */
+.info-box__phone--desktop {
+  display: none;
+}
+
+@media (min-width: 52.5625em) {
+  .info-box__phone--mobile {
+    display: none;
+  }
+
+  .info-box__phone--desktop {
+    display: inline-flex;
+  }
+
+  /* 배경이 글자에 붙지 않게 좌우 8px 여백 — 오른쪽 끝 위치는 그대로 (넓힌 만큼 바깥으로) */
+  .info-box__phone--desktop {
+    padding-inline: var(--space-8);
+    margin-inline-end: calc(var(--space-8) * -1);
+    border-radius: var(--button-radius-4);
+  }
+
+  /* 마우스를 올리면(키보드 포커스 포함) 화면 2 「전화문의」 버튼 호버와 같게
+   * — blue/700 배경, 흰 글자, 흰 아이콘 (사용자 결정 2026-11-10) */
+  .info-box__phone--desktop:hover,
+  .info-box__phone--desktop:focus-visible {
+    background: var(--color-blue-700);
+    color: var(--color-white-900);
+  }
+
+  .info-box__phone--desktop:hover .info-box__icon:not(.info-box__icon--hover),
+  .info-box__phone--desktop:focus-visible .info-box__icon:not(.info-box__icon--hover) {
+    display: none;
+  }
+
+  .info-box__phone--desktop:hover .info-box__icon--hover,
+  .info-box__phone--desktop:focus-visible .info-box__icon--hover {
+    display: block;
+  }
+}
+
 /* ───────── 화면 4 모양 (variant="split") ───────── */
 
 /* 묶음 사이 2px 구분선 (Figma Line 4, orange/700) */

@@ -60,8 +60,18 @@
     display: inline-flex;
   }
 
+  /* 배경이 글자에 붙지 않게 좌우 4px 여백 — 글자 위치는 그대로 (넓힌 만큼 바깥으로, 「전화번호:」와 사이 4px 안에서) */
+  .location-card__phone--desktop {
+    padding-inline: var(--space-4);
+    margin-inline: calc(var(--space-4) * -1);
+    border-radius: var(--button-radius-4);
+  }
+
+  /* 마우스를 올리면(키보드 포커스 포함) 화면 2 「전화문의」 버튼 호버와 같게
+   * — blue/700 배경, 흰 글자 (사용자 결정 2026-11-10) */
   .location-card__phone--desktop:hover,
   .location-card__phone--desktop:focus-visible {
-    background: var(--color-blue-100);
+    background: var(--color-blue-700);
+    color: var(--color-white-900);
   }
 }

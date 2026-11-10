@@ -76,9 +76,10 @@ export const SERVICES = [
 ]
 
 // 금연서비스 아래 주황 박스 (InfoBox)
-// 1544-9030은 PRD에 없는 번호라 전화 연결(tel:)은 하지 않음 — 연결 여부는 사용자 확인 필요
+// 금연전화상담 1544-9030 (보건복지부 금연상담전화) — 전화번호 원칙대로 (사용자 결정 2026-11-10)
+//   모바일: 누르면 연결 상자에서 전화 / 데스크톱: 누르면 번호 복사
 export const NO_SMOKING_INFO = [
-  [{ label: '금연전화상담', value: '1544-9030', size: 'large', icon: 'phone' }],
+  [{ label: '금연전화상담', value: '1544-9030', phone: '1544-9030', size: 'large', icon: 'phone' }],
   [
     { label: '운영시간 안내', value: '평일 : 9:00-22:00', icon: 'clock' },
     { label: '', value: '주말·공휴일 : 9:00-22:00', align: 'end' },
