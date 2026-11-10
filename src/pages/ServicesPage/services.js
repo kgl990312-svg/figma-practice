@@ -18,7 +18,8 @@ export const SERVICES = [
         label: '건강진단서',
         body: '- 매독,결핵,소변검사4종 \n 수수료 28,080원\n 처리기간\n5일(주말·공휴일제외)',
         buttons: [
-          { label: '가까운보건소방문', href: '' },
+          // 위치·교통 화면으로 — 구 보건소 화면에서 왔으면 그 구로 바로, 아니면 구 4곳을 고르는 상자 (ServicesPage, 사용자 결정 2026-11-10)
+          { label: '가까운보건소방문', toLocation: true },
           // 정부24 「보건소 증명문서 발급」 안내 — 건강진단결과서(보건증)·건강진단서 모두 발급, 온라인 무료
           // (안내는 로그인 없이, 신청은 본인 인증) — 사용자 결정 2026-11-09
           { label: '온라인발급하기', icon: 'file', caption: '정부24 페이지이동', href: 'https://www.gov.kr/portal/service/serviceInfo/PTR000051625' },

@@ -14,15 +14,19 @@
  *   onClose     닫힐 때 호출
  *   title       제목 (예: 치매안심센터 전화 연결)
  *   description 안내 문장
- *   items       [{ label, phone }] — 한 줄에 「label … 번호 📞」
+ *   items       [{ label, phone }] — 한 줄에 「label … 번호 📞」 (없으면 목록을 그리지 않음)
+ *   links       [{ label, href }] — 안내 상자로 쓸 때 사이트 안 화면으로 가는 링크 (한 줄에 하나, 📍 위치 아이콘)
+ *               예: 서식 다운로드 → 「관할 보건소 위치·교통 보기」, 가까운보건소방문 → 구 보건소 4곳 (사용자 결정 2026-11-10)
  */
 import { useEffect, useId, useRef } from 'react'
 import closeIcon from '../../../assets/icons/close.svg'
 import phoneBlue from '../../../assets/icons/phone-blue.svg'
 import phoneWhite from '../../../assets/icons/phone-white.svg'
+import locationBlue from '../../../assets/icons/location-blue.svg'
+import locationWhite from '../../../assets/icons/location-white.svg'
 import './CallModal.css'
 
-function CallModal({ open, onClose, title, description, items }) {
+function CallModal({ open, onClose, title, description, items = [], links = [] }) {
   const dialogRef = useRef(null)
   const titleId = useId()
   const descriptionId = useId()
@@ -63,25 +67,41 @@ function CallModal({ open, onClose, title, description, items }) {
             {description}
           </p>
         )}
-        <ul className="call-modal__list">
-          {items.map((item) => (
-            <li key={item.label}>
-              <a
-                className="call-modal__item"
-                href={`tel:${item.phone.replaceAll('-', '')}`}
-                aria-label={`${item.label} 전화 ${item.phone}`}
-              >
-                <span className="call-modal__item-label">{item.label}</span>
-                <span className="call-modal__item-phone">
-                  {item.phone}
+        {items.length > 0 && (
+          <ul className="call-modal__list">
+            {items.map((item) => (
+              <li key={item.label}>
+                <a
+                  className="call-modal__item"
+                  href={`tel:${item.phone.replaceAll('-', '')}`}
+                  aria-label={`${item.label} 전화 ${item.phone}`}
+                >
+                  <span className="call-modal__item-label">{item.label}</span>
+                  <span className="call-modal__item-phone">
+                    {item.phone}
+                    {/* 아이콘은 장식 */}
+                    <img className="call-modal__icon--default" src={phoneBlue} alt="" width="20" height="20" />
+                    <img className="call-modal__icon--pressed" src={phoneWhite} alt="" width="20" height="20" />
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+        {links.length > 0 && (
+          <ul className="call-modal__list">
+            {links.map((link) => (
+              <li key={link.href}>
+                <a className="call-modal__item" href={link.href}>
+                  <span className="call-modal__item-label">{link.label}</span>
                   {/* 아이콘은 장식 */}
-                  <img className="call-modal__icon--default" src={phoneBlue} alt="" width="20" height="20" />
-                  <img className="call-modal__icon--pressed" src={phoneWhite} alt="" width="20" height="20" />
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
+                  <img className="call-modal__icon--default" src={locationBlue} alt="" width="20" height="20" />
+                  <img className="call-modal__icon--pressed" src={locationWhite} alt="" width="20" height="20" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </dialog>
   )

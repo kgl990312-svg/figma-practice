@@ -34,10 +34,12 @@ function AccordionSection({ label, body, buttons = [] }) {
               icon={button.icon}
               caption={button.caption}
               href={button.href || undefined}
-              newWindow={Boolean(button.href) && !button.href.startsWith('tel:')}
+              // 외부 사이트(http)만 새 탭 — 사이트 안 화면(위치·교통 등)은 같은 탭
+              newWindow={Boolean(button.href?.startsWith('http'))}
               copyText={button.copyText}
               desktopLabel={button.desktopLabel}
               callName={button.callName}
+              notice={button.notice}
             />
           ))}
         </div>

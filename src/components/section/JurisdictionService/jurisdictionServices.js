@@ -6,14 +6,28 @@
  *   id, label           메뉴 버튼
  *   items[]             지원사업 아코디언 (title)
  *     sections[]        펼친 내용: 라벨 상자(label) + 본문(body, 줄바꿈 \n) + 버튼(buttons)
- *       buttons[]       SubClickButton 속성 그대로 (label, icon, caption, href, 전화 버튼용 copyText·desktopLabel·callName)
+ *       buttons[]       SubClickButton 속성 그대로 (label, icon, caption, href, 전화 버튼용 copyText·desktopLabel·callName,
+ *                       안내 상자 notice) + toLocation(지금 구의 위치·교통 화면으로 연결)
  *
  * - Figma 문구를 옮기며 확실한 오타만 고침 (docs/CLAUDE.md 「Figma와 다르게 구현하는 부분」 참고)
  * - href가 비어 있는 버튼은 연결 주소를 아직 받지 못한 것 (사용자 결정: 빈 주소로 둠)
+ * - toLocation: true → JurisdictionService가 지금 구의 위치·교통 주소로 바꿔 넣음 (notice 안에 있으면 상자 속 링크)
  * - sections가 빈 항목은 Figma에 펼친 내용이 없는 것
  */
 
-const formDownload = { label: '서식 다운로드', icon: 'file', href: '' }
+// 서식 다운로드 — 수원시보건소 홈페이지는 파일이 바로 내려받아져 연결할 주소가 없음
+// → 누르면 안내 상자(모달): 준비 중 + 관할 보건소 방문 안내 + 위치·교통 링크 (사용자 결정 2026-11-10)
+// toLocation: 화면 2가 지금 보고 있는 구의 위치·교통 주소(/location?gu=구)를 채워 줌 (JurisdictionService)
+const formDownload = {
+  label: '서식 다운로드',
+  icon: 'file',
+  notice: {
+    title: '서식 다운로드',
+    description: '서식 파일은 준비 중이에요. 주민등록상 주소지 관할 보건소를 방문하시면 신청서를 받을 수 있어요.',
+    linkLabel: '관할 보건소 위치·교통 보기',
+    toLocation: true,
+  },
+}
 
 export const JURISDICTION_SERVICES = [
   {
@@ -51,8 +65,16 @@ export const JURISDICTION_SERVICES = [
               '- 체외수정(신선배아, 동결배아),인공수정비중 일부 및 전액본인부담금, 비급여 3종(배아동결비,유산방지제,착상보조제),냉동난자 해동비\n' +
               '-출산아당 체외수정 최대 20회,인공수정 최대 5회지원',
             buttons: [
-              { label: '관할보건소방문하기', href: '' },
-              { label: '온라인신청하기', icon: 'file', caption: '정부24 페이지이동', href: '' },
+              // 지금 보고 있는 구의 위치·교통 화면으로 (사용자 결정 2026-11-10)
+              { label: '관할보건소방문하기', toLocation: true },
+              // e보건소 「난임부부 시술비 지원」 안내 — 로그인 없이 안내, 신청은 본인 인증 (사용자 결정 2026-11-10)
+              // Figma 보조 문구 「정부24 페이지이동」 → 연결 사이트에 맞춰 「e보건소 페이지이동」
+              {
+                label: '온라인신청하기',
+                icon: 'file',
+                caption: 'e보건소 페이지이동',
+                href: 'https://www.e-health.go.kr/gh/caSrvcGud/selectMdclSupGudInfo.do?heBiz=PG00001&menuId=200009',
+              },
             ],
           },
         ],
@@ -132,7 +154,8 @@ export const JURISDICTION_SERVICES = [
           {
             label: '지원내용',
             body: '- 임신 1회당 120만원 범위내',
-            buttons: [{ label: '온라인신청', icon: 'file', caption: '전자바우처페이지이동', href: '' }],
+            // 사회서비스 전자바우처 (청소년산모 바우처 신청처) — 사용자 결정 2026-11-10
+            buttons: [{ label: '온라인신청', icon: 'file', caption: '전자바우처페이지이동', href: 'https://www.socialservice.or.kr/' }],
           },
         ],
       },
@@ -251,7 +274,8 @@ export const JURISDICTION_SERVICES = [
               '※ 1년/4회이상 70,000원 등록비 정액지급 ※\n' +
               '※치료비 300,000원 한도 ※',
             buttons: [
-              { label: '수원시보건소 홈페이지', icon: 'external', caption: '현황참조 본 페이지이동', href: '' },
+              // 참여 의료기관 현황 페이지를 찾지 못해 수원시보건소 첫 화면으로 (사용자 결정 2026-11-10)
+              { label: '수원시보건소 홈페이지', icon: 'external', caption: '현황참조 본 페이지이동', href: 'https://health.suwon.go.kr/' },
             ],
           },
         ],
@@ -310,7 +334,13 @@ export const JURISDICTION_SERVICES = [
               '- 백혈병·조혈세포이식 3,000만원(이외 2,000만원)',
             buttons: [
               formDownload,
-              { label: '사이트바로가기', icon: 'external', caption: '국가암정보센터 페이지이동', href: '' },
+              // 국가암정보센터 「소아암환자」 지원 안내 (사용자 결정 2026-11-10)
+              {
+                label: '사이트바로가기',
+                icon: 'external',
+                caption: '국가암정보센터 페이지이동',
+                href: 'https://www.cancer.go.kr/lay1/S1T559C561/contents.do',
+              },
             ],
           },
         ],
@@ -327,7 +357,8 @@ export const JURISDICTION_SERVICES = [
           {
             label: '지원대상',
             body: '- 대상질환으로 최종 진단 및 산정특례 등록된 희귀질환자',
-            buttons: [{ label: '대상질환 확인하기', caption: '헬프라인 페이지이동', href: '' }],
+            // 희귀질환 헬프라인 — 대상질환은 사이트 안 「지원사업 › 의료비지원사업 › 대상질환」 (사용자 결정 2026-11-10)
+            buttons: [{ label: '대상질환 확인하기', caption: '헬프라인 페이지이동', href: 'https://helpline.kdca.go.kr/' }],
           },
           {
             label: '지원범위',

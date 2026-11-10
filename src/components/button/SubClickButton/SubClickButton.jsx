@@ -15,6 +15,11 @@
  * 모바일에서는 label(번호 없음)을 보여 주고, 누르면 연결 상자(CallModal)가 열려 번호를 눌러 전화 연결 (사용자 요청)
  *   callName → 모달 제목 「○○ 전화 연결」과 줄 이름 (예: 건강보험공단, 치과주치의)
  * 예: 화면 2 치과주치의 전화문의, 건강보험공단 문의하기
+ *
+ * notice가 있으면 누를 때 안내 상자(CallModal)를 연다 — 연결할 주소가 없는 버튼용 (사용자 결정 2026-11-10)
+ *   notice = { title, description, links: [{ label, href }] } — 상자 안에 사이트 안 화면으로 가는 링크 목록
+ * 예: 화면 2 서식 다운로드 → 「서식 파일은 준비 중이에요…」 + 「관할 보건소 위치·교통 보기」
+ *     화면 3 가까운보건소방문 → 구 보건소 4곳 중 골라 위치·교통으로
  */
 import { useId, useState } from 'react'
 import CallModal from '../../section/CallModal/CallModal.jsx'
@@ -35,7 +40,7 @@ const ICONS = {
 }
 
 // showPressed: 비교용 미리보기에서 누른 모양을 고정해 보여 줄 때만 사용 (실제 화면에서는 쓰지 않음)
-function SubClickButton({ label, icon, caption, href, newWindow = false, onClick, showPressed = false, copyText, desktopLabel, callName }) {
+function SubClickButton({ label, icon, caption, href, newWindow = false, onClick, showPressed = false, copyText, desktopLabel, callName, notice }) {
   const captionId = useId()
   const [callOpen, setCallOpen] = useState(false)
   const { message, copy } = useCopyText()
@@ -103,6 +108,26 @@ function SubClickButton({ label, icon, caption, href, newWindow = false, onClick
             onClose={() => setCallOpen(false)}
             title={`${modalName} 전화 연결`}
             items={[{ label: modalName, phone: copyText }]}
+          />
+        </>
+      ) : notice ? (
+        // 안내 상자 버튼 — 누르면 안내 상자(모달)
+        <>
+          <button
+            type="button"
+            className={mobileClass}
+            aria-haspopup="dialog"
+            aria-describedby={describedBy}
+            onClick={() => setCallOpen(true)}
+          >
+            {content}
+          </button>
+          <CallModal
+            open={callOpen}
+            onClose={() => setCallOpen(false)}
+            title={notice.title}
+            description={notice.description}
+            links={notice.links}
           />
         </>
       ) : href ? (

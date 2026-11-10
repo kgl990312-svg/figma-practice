@@ -16,13 +16,31 @@ import Accordion from '../Accordion/Accordion.jsx'
 import { JURISDICTION_SERVICES } from './jurisdictionServices.js'
 import './JurisdictionService.css'
 
-function JurisdictionService({ services = JURISDICTION_SERVICES, defaultServiceId }) {
+// 버튼의 toLocation 표시를 실제 위치·교통 주소로 바꿈 (관할보건소방문하기, 서식 다운로드 안내 상자 속 링크)
+function fillLocation(button, locationHref) {
+  if (button.toLocation) return { ...button, href: locationHref }
+  if (button.notice?.toLocation) {
+    const links = locationHref ? [{ label: button.notice.linkLabel, href: locationHref }] : []
+    return { ...button, notice: { ...button.notice, links } }
+  }
+  return button
+}
+
+// locationHref: 지금 보고 있는 구의 위치·교통 주소 (화면 2가 넘겨 줌, 예: /location?gu=paldal)
+function JurisdictionService({ services = JURISDICTION_SERVICES, defaultServiceId, locationHref }) {
   const [selectedId, setSelectedId] = useState(defaultServiceId ?? services[0].id)
   const [openIndex, setOpenIndex] = useState(0)
 
   const selected = services.find((service) => service.id === selectedId) ?? services[0]
   // Accordion은 id로 펼친 항목을 구분 → 순서 번호를 id로 쓴다
-  const items = selected.items.map((item, index) => ({ ...item, id: String(index) }))
+  const items = selected.items.map((item, index) => ({
+    ...item,
+    id: String(index),
+    sections: item.sections?.map((section) => ({
+      ...section,
+      buttons: section.buttons?.map((button) => fillLocation(button, locationHref)),
+    })),
+  }))
 
   const selectService = (id) => {
     if (id === selectedId) return

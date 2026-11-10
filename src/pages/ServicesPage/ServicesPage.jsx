@@ -24,13 +24,37 @@ import Accordion from '../../components/section/Accordion/Accordion.jsx'
 import InfoBox from '../../components/card/InfoBox/InfoBox.jsx'
 import TopButton from '../../components/button/TopButton/TopButton.jsx'
 import { SERVICES, NO_SMOKING_INFO } from './services.js'
-import { findDistrict } from '../DistrictPage/districts.js'
+import { DISTRICTS, findDistrict } from '../DistrictPage/districts.js'
 import './ServicesPage.css'
 import { toUrl } from '../../utils/url.js'
 
-const ITEMS = SERVICES.map((service) =>
-  service.id === 'no-smoking' ? { ...service, extra: <InfoBox groups={NO_SMOKING_INFO} /> } : service,
-)
+// 가까운보건소방문 → 위치·교통 화면 (사용자 결정 2026-11-10)
+//   구 보건소 화면에서 왔으면(from=구) 그 구로 바로 이동
+//   그 밖에는 구 4곳을 고르는 상자 — 모바일 위치·교통 화면에는 구를 바꾸는 버튼이 없어서
+const NEARBY_NOTICE = {
+  title: '가까운 보건소 방문',
+  description: '방문할 보건소를 골라 주세요. 위치와 교통 안내를 볼 수 있어요.',
+  links: DISTRICTS.map((district) => ({
+    label: `${district.label}구 보건소`,
+    href: toUrl(`/location?gu=${district.id}`),
+  })),
+}
+
+function fillLocation(button) {
+  if (!button.toLocation) return button
+  const from = findDistrict(new URLSearchParams(window.location.search).get('from'))
+  return from ? { ...button, href: toUrl(`/location?gu=${from.id}`) } : { ...button, notice: NEARBY_NOTICE }
+}
+
+const ITEMS = SERVICES.map((service) => {
+  const sections = service.sections?.map((section) => ({
+    ...section,
+    buttons: section.buttons?.map(fillLocation),
+  }))
+  return service.id === 'no-smoking'
+    ? { ...service, sections, extra: <InfoBox groups={NO_SMOKING_INFO} /> }
+    : { ...service, sections }
+})
 
 function getInitialOpen() {
   const open = new URLSearchParams(window.location.search).get('open')

@@ -91,7 +91,8 @@ function DistrictPage({ district }) {
         </div>
 
         <section aria-label="의료비지원">
-          <JurisdictionService />
+          {/* 관할보건소방문하기·서식 다운로드 안내 상자는 이 구의 위치·교통 화면으로 연결 */}
+          <JurisdictionService locationHref={location ? toUrl(`/location?gu=${id}`) : undefined} />
         </section>
 
         <ShortcutButton label="통합민원서비스 바로가기" caption="거주구 관계없이 이용가능" href={toUrl(`/services?from=${id}`)} />
