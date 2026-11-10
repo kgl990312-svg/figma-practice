@@ -33,7 +33,7 @@
 src/
   main.jsx, App.jsx, App.css
   index.css          전역 CSS 진입점 (fonts → tokens → reset → layout → base 순서 유지)
-  fonts/             Pretendard GOV 웹폰트 (Regular, Medium, SemiBold, Bold .woff2)
+  fonts/             Pretendard GOV 웹폰트 서브셋 (Regular, Medium, SemiBold, Bold .woff2)
   styles/
     fonts.css        @font-face — src/fonts의 4개 굵기 등록
     reset.css        최소 리셋
@@ -102,7 +102,7 @@ docs/
   - 텍스트 스타일 변수 `--typo-*`는 `font: var(--typo-body);`처럼 한 줄로 씁니다.
   - 검색창 플레이스홀더는 Figma의 #767676 대신 `--color-grey-400`을 씁니다(토큰에 없는 색이고, 대비가 4.54로 기준에 겨우 맞아 바꿈).
 - **텍스트 스타일**: `base.css` 클래스를 씁니다. `.text-title`(대제목), `.text-section`(섹션타이틀), `.text-card`(카드및버튼타이틀), `.text-body`(본문), `.text-caption`(캡션및보조설명)
-- **폰트**: Pretendard GOV (`--font-family`). `src/fonts`의 woff2 4개(400, 500, 600, 700)를 `src/styles/fonts.css`에서 등록합니다. 다른 굵기가 필요하면 파일 추가 전에 먼저 묻습니다.
+- **폰트**: Pretendard GOV (`--font-family`). `src/fonts`의 서브셋 woff2 4개(400, 500, 600, 700, 자주 쓰는 한글 2,350자만 담음)를 `src/styles/fonts.css`에서 등록합니다. 다른 굵기가 필요하면 파일 추가 전에 먼저 묻습니다.
 - **단위**: 레이아웃은 Flexbox/Grid와 상대 단위(rem, %)로 구성하고, 고정 px 너비는 쓰지 않습니다. 1rem = 16px입니다.
 - **반응형** (PRD 11장)
 

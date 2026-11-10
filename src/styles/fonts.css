@@ -1,5 +1,7 @@
 /*
  * 웹폰트 — Pretendard GOV (src/fonts)
+ * 서브셋 판 (v1.3.9, woff2-subset): 자주 쓰는 한글 2,350자 + 영문·숫자·기호만 담아 굵기마다 약 260KB (전체 판은 약 2MB)
+ *   화면에 없는 글자(드문 한글·한자)가 생기면 그 글자만 다음 글꼴로 보임 → 전체 판으로 되돌릴지 먼저 묻는다
  * Figma 텍스트 스타일에서 쓰는 굵기 4개만 등록한다: 400, 500, 600, 700
  * 폰트 이름은 Figma와 같은 'Pretendard GOV' → tokens.css의 --font-family에서 그대로 사용
  * font-display: swap — 폰트를 받는 동안 기본 글꼴로 먼저 보여 준다
