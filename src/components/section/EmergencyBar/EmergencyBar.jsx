@@ -7,6 +7,7 @@
  *   - 제목 줄을 누르면 접기/펼치기 (펼침: 아래 화살표, 접힘: 위 화살표)
  *   - 누르는 동안: Figma 「Property 1=클릭」(node 2402:3074) — 빨간 배경, 흰 글자·흰 아이콘
  *   - 접힘: Figma 「Property 1=접기」(node 2402:3073) — 배경 red/300, 높이 64px
+ *     제목·위 화살표는 red/900 (Figma 수정본 기준, 2026-11-10)
  *   - 버튼은 이동 안내 팝업 없이 바로 연결 — 주소를 아직 받지 못해 href가 비어 있으면 버튼 모양만 보여 줌
  *   - 외부 사이트(http로 시작)는 새 탭에서 열고, 화면 낭독기에 「새 창」을 알려 줌 (사용자 결정 2026-11-09)
  *
@@ -26,7 +27,7 @@ import pharmacyWhite from '../../../assets/icons/pharmacy-white.svg'
 import heartWhite from '../../../assets/icons/heart-white.svg'
 import moonWhite from '../../../assets/icons/moon-white.svg'
 import chevronDown from '../../../assets/icons/chevron-down.svg'
-import chevronUp from '../../../assets/icons/chevron-up.svg'
+import chevronUpRed from '../../../assets/icons/chevron-up-red.svg'
 import './EmergencyBar.css'
 
 const EMERGENCY_SERVICES = [
@@ -55,7 +56,7 @@ function EmergencyBar({ services = EMERGENCY_SERVICES, defaultOpen = true }) {
       >
         <span className="emergency-bar__title">긴급원클릭서비스</span>
         {/* 아이콘은 장식 — 펼침 상태는 aria-expanded로 전달 */}
-        <img src={open ? chevronDown : chevronUp} alt="" width="20" height="20" />
+        <img src={open ? chevronDown : chevronUpRed} alt="" width="20" height="20" />
       </button>
 
       <ul id={listId} className="emergency-bar__list" hidden={!open}>

@@ -73,7 +73,7 @@
    - 자동심장충격기 찾기
    - 달빛어린이병원 (보조 설명: 야간·휴일 병원)
    - 이동 안내 팝업과 별도 내부 페이지 없이 바로 연결합니다.
-   - 구현: 「휴일지킴이 (야간·휴일 약국)」, 「자동심장 충격기찾기」, 「달빛어린이병원 (야간·휴일진료)」. 연결 주소(사용자 확인 2026-11-09, 새 창): 휴일지킴이 https://www.pharm114.or.kr/ , 자동심장충격기찾기 E-Gen https://www.e-gen.or.kr/egen/search_aed.do , 달빛어린이병원 https://health.suwon.go.kr/sub.asp?page_code=sub0612 (수원시 목록).
+   - 구현: 「휴일지킴이 (야간·휴일 약국)」, 「자동심장 충격기찾기」, 「달빛어린이병원 (야간·휴일진료)」. 연결 주소(사용자 확인 2026-11-09, 새 창): 휴일지킴이 https://www.pharm114.or.kr/ , 자동심장충격기찾기 E-Gen https://www.e-gen.or.kr/egen/search_aed.do , 달빛어린이병원 https://health.suwon.go.kr/sub.asp?page_code=sub0612 (수원시 목록). 접으면 분홍 배경(`red/300`)에 제목·화살표는 진한 빨강(`red/900`)입니다(사용자 결정 2026-11-10).
 
 TOP 버튼은 화면 1에는 없습니다.
 

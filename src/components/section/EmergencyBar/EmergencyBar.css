@@ -32,6 +32,7 @@
 
 .emergency-bar--collapsed .emergency-bar__toggle {
   margin-top: 0;
+  color: var(--color-red-900); /* 제목 red/900 — 배경 red/300 대비 8.8:1 */
 }
 
 /* 제목 줄 — 줄 전체가 접기/펼치기 버튼 */
