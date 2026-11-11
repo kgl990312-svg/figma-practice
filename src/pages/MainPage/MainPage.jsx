@@ -8,7 +8,7 @@
  *   - 구 버튼 → /paldal, /gwonseon, /jangan, /yeongtong (화면 2)
  *   - 통합민원 카드 → /services?open=… (화면 3, 누른 항목이 펼쳐진 상태)
  */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import MobileNav from '../../components/form/MobileNav/MobileNav.jsx'
 import DesktopNav from '../../components/form/DesktopNav/DesktopNav.jsx'
 import SectionTitle from '../../components/section/SectionTitle/SectionTitle.jsx'
@@ -93,6 +93,16 @@ function MainPage() {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return
     setRegion(label)
   }
+
+  // 뒤로 가기로 돌아오면 브라우저가 떠날 때 모습(선택된 구)을 그대로 보여 줌(뒤로-앞으로 캐시)
+  // → 다시 보일 때 미선택으로 되돌림
+  useEffect(() => {
+    function resetRegion(event) {
+      if (event.persisted) setRegion(null)
+    }
+    window.addEventListener('pageshow', resetRegion)
+    return () => window.removeEventListener('pageshow', resetRegion)
+  }, [])
 
   return (
     <div className="main-page container">
