@@ -66,13 +66,13 @@ export const JURISDICTION_SERVICES = [
               '-출산아당 체외수정 최대 20회,인공수정 최대 5회지원',
             buttons: [
               // 지금 보고 있는 구의 위치·교통 화면으로 (사용자 결정 2026-11-10)
-              { label: '관할보건소방문하기', toLocation: true },
+              { label: '관할 보건소 방문하기', toLocation: true },
               // e보건소 「난임부부 시술비 지원」 안내 — 로그인 없이 안내, 신청은 본인 인증 (사용자 결정 2026-11-10)
               // Figma 보조 문구 「정부24 페이지이동」 → 연결 사이트에 맞춰 「e보건소 페이지이동」
               {
-                label: '온라인신청하기',
+                label: '온라인 신청하기',
                 icon: 'file',
-                caption: 'e보건소 페이지이동',
+                caption: 'e보건소 페이지 이동',
                 href: 'https://www.e-health.go.kr/gh/caSrvcGud/selectMdclSupGudInfo.do?heBiz=PG00001&menuId=200009',
               },
             ],
@@ -155,7 +155,7 @@ export const JURISDICTION_SERVICES = [
             label: '지원내용',
             body: '- 임신 1회당 120만원 범위내',
             // 사회서비스 전자바우처 (청소년산모 바우처 신청처) — 사용자 결정 2026-11-10
-            buttons: [{ label: '온라인신청', icon: 'file', caption: '전자바우처페이지이동', href: 'https://www.socialservice.or.kr/' }],
+            buttons: [{ label: '온라인 신청', icon: 'file', caption: '전자바우처 페이지 이동', href: 'https://www.socialservice.or.kr/' }],
           },
         ],
       },
@@ -275,7 +275,7 @@ export const JURISDICTION_SERVICES = [
               '※치료비 300,000원 한도 ※',
             buttons: [
               // 참여 의료기관 현황 페이지를 찾지 못해 수원시보건소 첫 화면으로 (사용자 결정 2026-11-10)
-              { label: '수원시보건소 홈페이지', icon: 'external', caption: '현황참조 본 페이지이동', href: 'https://health.suwon.go.kr/' },
+              { label: '수원시보건소 홈페이지', icon: 'external', caption: '현황참조 본 페이지 이동', href: 'https://health.suwon.go.kr/' },
             ],
           },
         ],
@@ -336,9 +336,9 @@ export const JURISDICTION_SERVICES = [
               formDownload,
               // 국가암정보센터 「소아암환자」 지원 안내 (사용자 결정 2026-11-10)
               {
-                label: '사이트바로가기',
+                label: '사이트 바로가기',
                 icon: 'external',
-                caption: '국가암정보센터 페이지이동',
+                caption: '국가암정보센터 페이지 이동',
                 href: 'https://www.cancer.go.kr/lay1/S1T559C561/contents.do',
               },
             ],
@@ -358,7 +358,7 @@ export const JURISDICTION_SERVICES = [
             label: '지원대상',
             body: '- 대상질환으로 최종 진단 및 산정특례 등록된 희귀질환자',
             // 희귀질환 헬프라인 — 대상질환은 사이트 안 「지원사업 › 의료비지원사업 › 대상질환」 (사용자 결정 2026-11-10)
-            buttons: [{ label: '대상질환 확인하기', caption: '헬프라인 페이지이동', href: 'https://helpline.kdca.go.kr/' }],
+            buttons: [{ label: '대상질환 확인하기', caption: '헬프라인 페이지 이동', href: 'https://helpline.kdca.go.kr/' }],
           },
           {
             label: '지원범위',
