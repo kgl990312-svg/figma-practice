@@ -9,7 +9,7 @@
  *
  * items[]
  *   id, title
- *   sections[]   라벨 상자(label) + 본문(body, 줄바꿈 \n 유지) + 버튼(buttons — SubClickButton 속성)
+ *   sections[]   라벨 상자(label, 제목보다 한 단계 아래 h태그) + 본문(body, 줄바꿈 \n 유지) + 버튼(buttons — SubClickButton 속성)
  *   extra        내용 맨 아래에 붙일 요소 (예: 금연서비스의 InfoBox)
  *
  * Figma에 hover 상태 없음 → 만들지 않음
@@ -20,10 +20,12 @@ import chevronDown from '../../../assets/icons/chevron-down.svg'
 import chevronUp from '../../../assets/icons/chevron-up.svg'
 import './Accordion.css'
 
-function AccordionSection({ label, body, buttons = [] }) {
+function AccordionSection({ label, body, buttons = [], labelLevel }) {
+  const Label = labelLevel
   return (
     <div className="accordion__section">
-      <p className="accordion__label">{label}</p>
+      {/* 라벨은 아코디언 제목 바로 아래 단계 소제목 — 화면 낭독기에서 제목 단위로 건너뛸 수 있게 */}
+      <Label className="accordion__label">{label}</Label>
       <p className="accordion__body">{body}</p>
       {buttons.length > 0 && (
         <div className={`accordion__buttons accordion__buttons--${buttons.length}`}>
@@ -51,6 +53,8 @@ function AccordionSection({ label, body, buttons = [] }) {
 function Accordion({ items, openId, onToggle, spacing = 'normal', headingLevel = 'h3' }) {
   const baseId = useId()
   const Heading = headingLevel
+  // 라벨 상자는 제목보다 한 단계 아래 (h3 → h4), h6이 끝
+  const labelLevel = `h${Math.min(Number(headingLevel.slice(1)) + 1, 6)}`
 
   return (
     <div className={`accordion accordion--${spacing}`}>
@@ -77,7 +81,7 @@ function Accordion({ items, openId, onToggle, spacing = 'normal', headingLevel =
               {sections.length > 0 && (
                 <div className="accordion__sections">
                   {sections.map((section) => (
-                    <AccordionSection key={section.label} {...section} />
+                    <AccordionSection key={section.label} {...section} labelLevel={labelLevel} />
                   ))}
                 </div>
               )}
