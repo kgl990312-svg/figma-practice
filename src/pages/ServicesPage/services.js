@@ -16,7 +16,7 @@ export const SERVICES = [
       },
       {
         label: '건강진단서',
-        body: '- 매독,결핵,소변검사4종 \n 수수료 28,080원\n 처리기간\n5일(주말·공휴일제외)',
+        body: '- 매독,결핵,소변검사4종\n 수수료: 28,080원\n 처리기간: 5일(주말·공휴일제외)',
         buttons: [
           // 위치·교통 화면으로 — 구 보건소 화면에서 왔으면 그 구로 바로, 아니면 구 4곳을 고르는 상자 (ServicesPage, 사용자 결정 2026-11-10)
           { label: '가까운 보건소 방문', toLocation: true },
@@ -45,7 +45,7 @@ export const SERVICES = [
   },
   {
     id: 'treatment',
-    title: '진료및 검사',
+    title: '진료 및 검사',
     sections: [
       { label: '대상', body: '만 15세 이상 대한민국 국민' },
       { label: '준비물', body: '신분증, 의료급여증,진료비 무료대상 증빙서류' },
@@ -53,7 +53,7 @@ export const SERVICES = [
   },
   {
     id: 'no-smoking',
-    title: '금연서비스',
+    title: '금연 서비스',
     sections: [
       {
         label: '금연클리닉실 운영',

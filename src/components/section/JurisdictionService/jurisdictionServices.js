@@ -155,7 +155,7 @@ export const JURISDICTION_SERVICES = [
             label: '지원내용',
             body: '- 임신 1회당 120만원 범위내',
             // 사회서비스 전자바우처 (청소년산모 바우처 신청처) — 사용자 결정 2026-11-10
-            buttons: [{ label: '온라인 신청', icon: 'file', caption: '전자바우처 페이지 이동', href: 'https://www.socialservice.or.kr/' }],
+            buttons: [{ label: '온라인 신청하기', icon: 'file', caption: '전자바우처 페이지 이동', href: 'https://www.socialservice.or.kr/' }],
           },
         ],
       },
@@ -190,7 +190,7 @@ export const JURISDICTION_SERVICES = [
         sections: [
           { label: '자격', body: '- 수원시 거주자' },
           {
-            label: '자격내용',
+            label: '지원내용',
             body:
               '- 진료비는 지원에서 제외\n' +
               '- 출생일 이후 28일이내에 실시하여 건강보험 적용된 선별검사에 한하여 지원(최대 2회지원)',
@@ -202,7 +202,7 @@ export const JURISDICTION_SERVICES = [
         sections: [
           { label: '자격', body: '- 선천성대사이상 환아' },
           {
-            label: '자격내용',
+            label: '지원내용',
             body:
               '- 선천성대사이상 선별검사결과 유소견 판정 후 확진검사를 받고 환자로 판정된 경우\n' +
               '※ 본인부담금 7만원 한도 내 지원 ※\n' +
@@ -215,7 +215,7 @@ export const JURISDICTION_SERVICES = [
         sections: [
           { label: '자격', body: '- 수원시 거주자' },
           {
-            label: '자격내용',
+            label: '지원내용',
             body:
               '- 미숙아: 임신 37주미만 2500g 미만 출생아(24시간이내 신생아가 중환자실에 입원한 경우)\n' +
               '- 선천성이상아: 출생 후 2년이내 선천성이상 진단 후 치료 후 출생 후 2년이내 입원하여 수술한경우(외모개선목적수술제외)',
@@ -226,7 +226,7 @@ export const JURISDICTION_SERVICES = [
         title: '영유아 발달장애 정밀검사비지원',
         sections: [
           { label: '자격', body: "- 영유아 검진결과 '심화평가 권고' 통보대상" },
-          { label: '자격내용', body: '- 연간 1인당 1회 지원' },
+          { label: '지원내용', body: '- 연간 1인당 1회 지원' },
         ],
       },
       {
@@ -234,7 +234,7 @@ export const JURISDICTION_SERVICES = [
         sections: [
           { label: '자격', body: '- 건강보험가입자' },
           {
-            label: '자격내용',
+            label: '지원내용',
             body: '- 최대 만 18세까지\n-전체암종 지원\n- 백혈병·조혈모세포이식 3,000만원(이외 2,000만원)',
           },
         ],
@@ -247,7 +247,7 @@ export const JURISDICTION_SERVICES = [
             body: '-진단을 받은 만 10세미만 어린이\n※ 수술 약3개월전 보건소에 대상자 선정 신청 필수 ※',
           },
           {
-            label: '자격내용',
+            label: '지원내용',
             body:
               '- 지원질환: 사시,안검내반,백내장,망막질환,녹내장등 안과적수술\n' +
               '-지원범위: 신청 질환과 관련한 수술비(일반실·입원료포함)및 사전검사비',
@@ -284,7 +284,7 @@ export const JURISDICTION_SERVICES = [
   },
   {
     id: 'dental',
-    label: '치과주치의사업',
+    label: '치과주치의 사업',
     items: [
       {
         title: '치과주치의 사업',
@@ -331,7 +331,7 @@ export const JURISDICTION_SERVICES = [
             label: '소아 암환자 의료비지원',
             body:
               '- 만 18세 미만\n-전체암종지원\n- 최대 만 18세까지 연속\n' +
-              '- 백혈병·조혈세포이식 3,000만원(이외 2,000만원)',
+              '- 백혈병·조혈모세포이식 3,000만원(이외 2,000만원)',
             buttons: [
               formDownload,
               // 국가암정보센터 「소아암환자」 지원 안내 (사용자 결정 2026-11-10)
@@ -352,7 +352,7 @@ export const JURISDICTION_SERVICES = [
     label: '희귀질환자 의료비지원',
     items: [
       {
-        title: '희귀질환 의료비지원',
+        title: '희귀질환자 의료비지원',
         sections: [
           {
             label: '지원대상',
@@ -389,7 +389,7 @@ export const JURISDICTION_SERVICES = [
           {
             label: '인공관절 수술지원',
             body:
-              '- 자격대상: 만 60세 이상,국민기초생활수급자,차상위계층,한부모가족\n' +
+              '- 지원대상: 만 60세 이상,국민기초생활수급자,차상위계층,한부모가족\n' +
               "- 지원내용: '인공관절치환술' 인정기준에 준하는 질환자\n" +
               '※ 한쪽 무릎기준 120만원한도 실비 지원 ※',
           },
@@ -399,7 +399,7 @@ export const JURISDICTION_SERVICES = [
   },
   {
     id: 'infectious-disease',
-    label: '감염병환자 입원치료',
+    label: '감염병 환자 입원치료',
     items: [
       {
         title: '감염병 환자 입원치료',
@@ -469,8 +469,8 @@ export const JURISDICTION_SERVICES = [
               '- HIV 감염 산모에서 태어난 신생아',
           },
           {
-            label: '지원내용및 방법',
-            body: '- 진료기관에서 치료제 투약에 따른 검사를 진료와 검사를 실시 하거나 관련 질환으로 진료를 받은 경우',
+            label: '지원내용',
+            body: '- 진료기관에서 치료제 투약에 따른 진료와 검사를 실시하거나 관련 질환으로 진료를 받은 경우',
           },
           {
             label: '지원방법',

@@ -104,7 +104,7 @@ function ServicesPage() {
           <SectionTitle
             id="services-title"
             title="통합민원서비스"
-            description="거주 구와 관계없이 이용할 수 있는 서비스입니다. 가까운 보건소로 방문하세요."
+            description="거주 구와 관계없이 이용할 수 있는 서비스입니다. 가까운 보건소를 방문하세요."
           />
           <Accordion items={ITEMS} openId={openId} onToggle={toggle} spacing="loose" />
         </section>

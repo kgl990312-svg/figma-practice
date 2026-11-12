@@ -32,7 +32,7 @@ const REGIONS = DISTRICTS.map((district) => ({ label: district.label, href: toUr
 const SERVICES = [
   { label: '제증명발급', icon: 'document', open: 'certificate' },
   { label: '예방접종', icon: 'syringe', open: 'vaccination' },
-  { label: '진료및검사', icon: 'stethoscope', open: 'treatment' },
+  { label: '진료 및 검사', icon: 'stethoscope', open: 'treatment' },
   { label: '금연 서비스', icon: 'noSmoking', open: 'no-smoking' },
 ]
 
@@ -155,7 +155,7 @@ function MainPage() {
           <SectionTitle
             id="main-services"
             title="통합민원서비스"
-            description="거주 구와 관계없이 이용할 수 있는 서비스입니다. 가까운 보건소로 방문하세요."
+            description="거주 구와 관계없이 이용할 수 있는 서비스입니다. 가까운 보건소를 방문하세요."
           />
           <ul className="main-page__services">
             {SERVICES.map((service) => (
@@ -170,7 +170,7 @@ function MainPage() {
           <SectionTitle
             id="main-centers"
             title="수원시 의료센터"
-            description="수원시민 대상입니다. 자세한 이용 대상 센터에 문의주세요."
+            description="수원시민 대상입니다. 자세한 이용 대상은 센터에 문의해 주세요."
           />
           <ul className="main-page__centers">
             {MEDICAL_CENTERS.map((center) => (

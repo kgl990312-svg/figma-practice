@@ -115,8 +115,8 @@ function Preview() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', width: '328px' }}>
           <ServiceCard label="제증명발급" icon="document" href="#" />
           <ServiceCard label="예방접종" icon="syringe" href="#" />
-          <ServiceCard label="진료및검사" icon="stethoscope" href="#" />
-          <ServiceCard label="금연서비스" icon="noSmoking" href="#" />
+          <ServiceCard label="진료 및 검사" icon="stethoscope" href="#" />
+          <ServiceCard label="금연 서비스" icon="noSmoking" href="#" />
         </div>
       </section>
 
