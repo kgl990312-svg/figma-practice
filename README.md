@@ -1,16 +1,47 @@
-# React + Vite
+# [수원시  앱 개선 프로젝트로]
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> [한 줄 소개:수원시 보건소 지역버튼을 도입하여 헛걸음 방지]
+>  보건 주요 서비스 카드를 재배치 하여 사용자가 필요로 하는 서비스가 주소상 등록된 주소지 에서만 신청가능한지, 내 위치에서 가까운 보건소에서도 신청가능한 서비스인지
 
-Currently, two official plugins are available:
+## 1. 링크
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Live Demo**: https://kgl990312-svg.github.io/figma-practice/
+- **GitHub**: https://github.com/kgl990312-svg/figma-practice
+- **Figma 디자인**: https://www.figma.com/design/ttUW1a9zYIsPGMGH3VCiBz/%EC%88%98%EC%9B%90%EC%8B%9C%EB%B3%B4%EA%B1%B4%EC%86%8C%ED%81%B4%EB%A1%A0?node-id=2261-2789&t=pymCmaSwALFWgpAF-1
 
-## React Compiler
+## 2. 프로젝트 정보
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **제작 기간**: 2026.11.06 ~ 2026.11.09 (4일)
+- **담당 역할**: 개인 프로젝트 (기여도 100%)
+- **담당 범위**: Figma 개선 디자인 → 바이브코딩 구현 → GitHub Pages 배포
 
-## Expanding the Oxlint configuration
+## 3. 사용 기술
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **React, Vite**: 화면을 컴포넌트로 나눠 수정하기 쉽게 구현
+- **GitHub Pages**: 무료 배포
+- **Figma**: 개선 디자인
+- **Claude**: 바이브코딩 (화면 구현)
+
+## 4. 주요 기능
+
+- [기능 1: 카드르 재배치 함으로써 서비스를 세 영역(보건 주요 서비스 / 통합민원서비스 / 긴급원클릭서비스)으로 나누면, 사용자가 원하는 서비스가 어떤 종류인지 더 쉽게 알고 알맞은 길을 고르는가]
+- [기능 2: 내지역버튼 도입 첫 화면의 안내문과 내 지역 버튼이 있으면, 사용자가 관할 보건사업을 헛걸음 없이 찾는가]
+- [기능 3: 모바일·데스크탑 반응형 레이아웃]
+
+## 5. 트러블슈팅
+
+### 이슈 1: [주소 배포후 에러 404 화면이 나옴]
+
+- **문제**: 배포 후 주소 링크 공유시  에러 화면이 나옴
+- **원인**: Private 되어있었음
+- **해결**: Public 변경후 재배포
+
+## 6. AI 활용 방식
+
+- **맡긴 일**:  Figma 화면을 React 컴포넌트로 구현
+- **핵심 프롬프트**:"이 프레임을 모바일 너비(360px-) 기준 데스크톱 (1440px-) 기준으로 구현해 줘"
+
+## 7. 회고
+
+- **배운 점**: 배포전 꼭 public 되어 있는지 확인후 배포할것 
+- **아쉬운 점**: 모바일 기준으로 구현하다보니 테블릿 화면 기준은 구현하지 못함
